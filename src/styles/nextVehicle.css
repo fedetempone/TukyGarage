@@ -1,0 +1,108 @@
+.next-vehicle-section {
+  width: 100%;
+  padding: 80px 20px;
+  background-color: #000;
+  /* fondo negro */
+  color: #fff;
+}
+
+.next-vehicle-content{
+  text-align: center;
+}
+
+.next-vehicle-title {
+  display: inline-block; /* hace que el h2 tenga ancho del texto */
+  position: relative; /* necesario para ::before y ::after */
+  text-align: center;
+  margin-bottom: 50px;
+  color: #fff;
+}
+
+.next-vehicle-title::before,
+.next-vehicle-title::after {
+  content: "";
+  position: absolute;
+  width: 100%; /* ahora ocupa solo el ancho del h2 */
+  height: 2px;
+  background-color: #00d9f4;
+}
+
+/* primera linea justo abajo del titulo */
+.next-vehicle-title::before {
+  bottom: -4px;
+  left: 0;
+}
+
+/* segunda linea 2px mas abajo */
+.next-vehicle-title::after {
+  bottom: -9px;
+  left: 0;
+}
+
+.next-vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+
+.next-vehicle-card {
+  background-color: #111;
+  /* leve contraste con negro */
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 95%;
+  min-height: 360px;
+  /* fija la altura */
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  /* para animación fade-in */
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.next-vehicle-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.next-vehicle-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.next-vehicle-info {
+  padding: 15px;
+  text-align: center;
+}
+
+.next-vehicle-info h3 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.next-vehicle-info p {
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+  color: #cdf26a;
+  /* acento secundario */
+}
+
+.next-vehicle-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #00d9f4;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.next-vehicle-btn:hover {
+  background-color: #00b8d1;
+  transform: scale(1.05);
+}

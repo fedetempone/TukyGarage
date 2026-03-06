@@ -3,32 +3,49 @@ import "../styles/nav.css";
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showNav, setShowNav] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
+  // bloquear scroll solo cuando menu mobile abierto
   useEffect(() => {
-    document.documentElement.style.overflow = isMenuOpen ? "hidden" : "auto";
-    document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
-
-    return () => {
-      document.documentElement.style.overflow = "auto";
-      document.body.style.overflow = "auto";
-    };
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto"; 
+    }
   }, [isMenuOpen]);
 
+  // control scroll hide/show navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll > lastScrollY && currentScroll > 100) {
+        setShowNav(false); 
+      } else {
+        setShowNav(true); 
+      }
+
+      setLastScrollY(currentScroll);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${showNav ? "show" : "hide"}`}>
       <div className="navbar-content">
 
-        {/* Logo */}
         <div className="logo-link">
           <a href="#home">
             <h1 className="logo-text">TukyGarage</h1>
           </a>
         </div>
 
-        {/* Desktop links */}
         <ul className="nav-links">
           <li><a href="#home">Home</a></li>
           <li><a href="#stock">Stock</a></li>
@@ -36,14 +53,12 @@ const Nav = () => {
           <li><a href="#contacto">Contacto</a></li>
         </ul>
 
-        {/* CTA desktop */}
         <div className="cta-desktop">
           <a href="#cotiza">
             <button className="cta-button">Quiero vender</button>
           </a>
         </div>
 
-        {/* Hamburger mobile */}
         <div
           className={`hamburger ${isMenuOpen ? "active" : ""}`}
           onClick={toggleMenu}
@@ -54,7 +69,6 @@ const Nav = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
         <ul>
           <li><a href="#home" onClick={closeMenu}>Home</a></li>
