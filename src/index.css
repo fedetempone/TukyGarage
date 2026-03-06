@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- titulos --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* --- subtitulos y parrafos --- */
+p,
+span,
+li,
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* --- titulos --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* tamaños de fuente clampeados*/
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.8rem, 4.5vw, 3rem); }
+h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+h4 { font-size: clamp(1.25rem, 3.5vw, 2rem); }
+h5 { font-size: clamp(1.1rem, 3vw, 1.75rem); }
+h6 { font-size: clamp(1rem, 2.5vw, 1.5rem); }
+
+
+/* fuente de botones */
+button, .btn {
+  font-family: 'Lexend Deca', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: clamp(0.9rem, 2vw, 1rem); /* responsive */
+}
+
+/* --- responsive */
+@media (max-width: 500px) {
+  h1 { font-size: clamp(1.8rem, 6vw, 3rem); }
+  h2 { font-size: clamp(1.6rem, 5vw, 2.5rem); }
+  h3 { font-size: clamp(1.4rem, 4.5vw, 2.2rem); }
+  h4 { font-size: clamp(1.2rem, 4vw, 1.8rem); }
+  h5 { font-size: clamp(1rem, 3.5vw, 1.5rem); }
+  h6 { font-size: clamp(0.9rem, 3vw, 1.2rem); }
+
+  p { font-size: clamp(0.85rem, 3vw, 1.1rem); }
+  .subtitle { font-size: clamp(0.95rem, 3vw, 1.15rem); }
+}
+
+@media (min-width: 501px) and (max-width: 999px) {
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.8rem, 4.5vw, 3rem); }
+  h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+  h4 { font-size: clamp(1.25rem, 3.5vw, 2rem); }
+  h5 { font-size: clamp(1.1rem, 3vw, 1.75rem); }
+  h6 { font-size: clamp(1rem, 2.5vw, 1.5rem); }
+
+  p { font-size: clamp(0.9rem, 2vw, 1.2rem); }
+  .subtitle { font-size: clamp(1rem, 2vw, 1.25rem); }
+}
+
+@media (min-width: 1000px) {
+  h1 { font-size: clamp(2.5rem, 3vw, 3.5rem); }
+  h2 { font-size: clamp(2.2rem, 2.5vw, 3rem); }
+  h3 { font-size: clamp(1.8rem, 2.5vw, 2.5rem); }
+  h4 { font-size: clamp(1.5rem, 2vw, 2rem); }
+  h5 { font-size: clamp(1.25rem, 1.8vw, 1.75rem); }
+  h6 { font-size: clamp(1.1rem, 1.5vw, 1.5rem); }
+
+  p { font-size: clamp(1rem, 1.5vw, 1.2rem); }
+  .subtitle { font-size: clamp(1.1rem, 1.5vw, 1.25rem); }
+}

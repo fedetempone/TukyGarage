@@ -1,0 +1,162 @@
+/* seccion principal */
+.who-we-are-section {
+  width: 100%;
+  padding: 80px 20px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* contenedor de imagen + texto */
+.who-we-are-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  gap: 40px;
+}
+
+/* wrapper de imagen para perspectiva 3D */
+.who-we-are-img-wrapper {
+  perspective: 1000px;
+}
+
+/* imagen circular con efecto de giro */
+.who-we-are-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 25px #00d9f4;
+  transition: transform 6s ease; 
+}
+
+.who-we-are-img.rotate {
+  transform: rotateY(360deg);
+}
+
+/* texto de la seccion */
+.who-we-are-text {
+  color: #000;
+  max-width: 700px;
+  text-align: center;
+}
+
+/* titulo en bold con doble subrayado  */
+.who-we-are-text h2 {
+  font-size: clamp(2rem, 4vw, 3.5vh);
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
+}
+
+/* subrayado doble sobre h2 usando pseudo-elementos */
+.who-we-are-text h2::before,
+.who-we-are-text h2::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background-color: #00d9f4;
+  left: 0;
+  right: 0;
+}
+
+.who-we-are-text h2::before {
+  bottom: -12px;
+}
+
+.who-we-are-text h2::after {
+  bottom: -16px;
+}
+
+/* parrafos */
+.who-we-are-text p {
+  font-size: clamp(1rem, 2.5vw, 2vh);
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+/* --- Responsive --- */
+
+/* MOBILE: hasta 500px */
+@media (max-width: 500px) {
+  .who-we-are-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .who-we-are-text {
+    text-align: center;
+  }
+
+  .who-we-are-img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .who-we-are-text h2 {
+    font-size: clamp(1.8rem, 5vw, 3vh);
+  }
+
+  .who-we-are-text p {
+    font-size: clamp(0.9rem, 3vw, 1.8vh);
+  }
+}
+
+/* TABLET: 501px a 999px */
+@media (min-width: 501px) and (max-width: 999px) {
+  .who-we-are-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .who-we-are-text {
+    text-align: center;
+  }
+
+  .who-we-are-img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .who-we-are-text h2 {
+    font-size: clamp(2rem, 4vw, 3.5vh);
+  }
+
+  .who-we-are-text p {
+    font-size: clamp(1rem, 2.5vw, 2vh);
+  }
+}
+
+/* DESKTOP: desde 1000px */
+@media (min-width: 1000px) {
+  .who-we-are-container {
+    flex-direction: row;
+    align-items: center;
+    gap: 80px;
+  }
+
+  .who-we-are-text {
+    text-align: left;
+  }
+
+  .who-we-are-img {
+    width: 250px;
+    height: 250px;
+  }
+
+  .who-we-are-text h2 {
+    font-size: clamp(2.5rem, 3vw, 3.5vh);
+  }
+
+  .who-we-are-text p {
+    font-size: clamp(1.2rem, 2vw, 2vh);
+  }
+}

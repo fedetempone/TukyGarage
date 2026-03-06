@@ -1,0 +1,110 @@
+/* seccion principal*/
+.how-we-work-section {
+  width: 100%;
+  padding: 80px 20px;
+  background-color: rgba(0, 0, 0, 0.95); /* overlay negro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* contenedor general */
+.how-we-work-container {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+}
+
+/* titulo */
+.how-we-work-container h2 {
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block; 
+}
+
+/* subrayado doble debajo del h2 */
+.how-we-work-container h2::before,
+.how-we-work-container h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #00d9f4;
+}
+
+/* primera linea justo abajo del titulo */
+.how-we-work-container h2::before {
+  bottom: -4px; 
+}
+
+/* segunda linea 2px mas abajo */
+.how-we-work-container h2::after {
+  bottom: -9px; 
+}
+
+/* grid de cards */
+.how-we-work-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+/* card individual */
+.how-we-work-card {
+  background-color: #000;
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.how-we-work-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 40px #00d9f4;
+}
+
+/* icono */
+.how-we-work-icon {
+  margin-bottom: 20px;
+  color: #00d9f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* parrafos adentro de  las card */
+.how-we-work-card p {
+  font-family: 'Inter', sans-serif; /* ya lo tenés en global */
+  font-weight: 300;
+  font-size: clamp(1rem, 2.5vw, 2vh);
+  line-height: 1.6;
+  color: #fff;
+}
+
+/* --- Responsive --- */
+
+/* Mobile */
+@media (max-width: 500px) {
+  .how-we-work-grid {
+    grid-template-columns: 1fr;
+  }
+  .how-we-work-card {
+    padding: 20px 15px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 501px) and (max-width: 999px) {
+  .how-we-work-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1000px) {
+  .how-we-work-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
