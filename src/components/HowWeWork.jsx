@@ -1,22 +1,21 @@
-import React from "react";
 import "../styles/howWeWork.css";
-import { Car, Wrench, PaintBrush } from "phosphor-react";
+import { Car as LucideCar, Wrench as LucideWrench, Paintbrush as LucidePaintbrush } from "lucide-react";
 
 const workItems = [
   {
-    icon: <Car size={64} weight="duotone" />,
+    icon: <LucideCar size={64} />,
     title: "Restauración",
     description:
       "Restauramos vehículos aplicando los más altos estándares de cuidado y detailing.",
   },
   {
-    icon: <Wrench size={64} weight="duotone" />,
+    icon: <LucideWrench size={64} />,
     title: "Mantenimiento",
     description:
       "Revisamos y mantenemos cada vehículo para que llegue en perfectas condiciones.",
   },
   {
-    icon: <PaintBrush size={64} weight="duotone" />,
+    icon: <LucidePaintbrush size={64} />,
     title: "Detailing",
     description:
       "Acabados de alta calidad para que tu auto luzca impecable y listo para la venta.",

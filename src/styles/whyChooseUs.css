@@ -1,0 +1,74 @@
+/* seccion fondo blanco */
+.whychooseus-section{
+  width:100%;
+  padding:80px 20px;
+  background:#fff;
+  color:#111;
+}
+
+/* contenedor */
+.whychooseus-container{
+  max-width:1400px;
+  margin:0 auto;
+  text-align:center;
+}
+
+/* titulo */
+.whychooseus-title{
+  margin-bottom:50px;
+}
+
+/* grid responsive */
+.whychooseus-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+}
+
+/* card individual */
+.whychooseus-card{
+  background:rgba(0,0,0,0.03);
+  padding:28px 20px;
+  border-radius:12px;
+  opacity:0;
+  transform:translateY(30px);
+  transition:all 0.8s ease;
+}
+
+/* fade-in cuando visible */
+.whychooseus-card.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* icono */
+.whychooseus-icon{
+  color:#ac1f1d;
+  margin-bottom:16px;
+  transition:transform .3s ease;
+}
+
+/* hover icono */
+.whychooseus-card:hover .whychooseus-icon{
+  transform:scale(1.2);
+}
+
+/* nombre */
+.whychooseus-name{
+  margin-bottom:12px;
+  font-weight:600;
+}
+
+/* descripcion */
+.whychooseus-desc{
+  font-size:1rem;
+  opacity:.85;
+  line-height:1.5;
+}
+
+/* responsive */
+@media(max-width:768px){
+  .whychooseus-card{
+    padding:20px 16px;
+  }
+}

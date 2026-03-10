@@ -18,8 +18,8 @@
 
 .latest-vehicles-header-btn {
   padding: 10px 20px;
-  background-color: #00d9f4;
-  color: #000;
+  background-color: #ac1f1d;
+  color: #fff;
   font-weight: bold;
   border: none;
   border-radius: 6px;
@@ -28,7 +28,7 @@
 }
 
 .latest-vehicles-header-btn:hover {
-  background-color: #00b8d1;
+  background-color: #ac1f1d;
   transform: scale(1.05);
 }
 
@@ -71,14 +71,14 @@
 .latest-vehicle-info p {
   margin-bottom: 5px;
   font-size: 0.95rem;
-  color: #cdf26a; /* acento secundario */
+  color: #fff; /* acento secundario */
 }
 
 .latest-vehicle-btn {
   margin-top: 10px;
   padding: 10px 20px;
-  background-color: #00d9f4;
-  color: #000;
+  background-color: #ac1f1d;
+  color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -87,7 +87,7 @@
 }
 
 .latest-vehicle-btn:hover {
-  background-color: #00b8d1;
+  background-color: #ac1f1d;
   transform: scale(1.05);
 }
 
@@ -98,8 +98,8 @@
 
 .latest-vehicles-footer-btn {
   padding: 12px 28px;
-  background-color: #00d9f4;
-  color: #000;
+  background-color: #ac1f1d;
+  color: #fff;
   font-weight: bold;
   border-radius: 6px;
   border: none;
@@ -108,8 +108,10 @@
 }
 
 .latest-vehicles-footer-btn:hover {
-  background-color: #00b8d1;
+  background-color: #fff;
+  box-shadow:0 15px 40px rgba(172,31,29,0.35);
   transform: scale(1.05);
+  color: #000;
 }
 
 /* Responsive para mobile hasta 500px */

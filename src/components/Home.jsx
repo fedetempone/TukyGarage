@@ -5,6 +5,11 @@ import HowWeWork from "../components/HowWeWork";
 import NextVehicle from "../components/NextVehicle";
 import SellCar from "../components/SellCar";
 import LatestVehicles from "../components/LatestVehicles";
+import AllVehicles from "../components/AllVehicles";
+import OurServices from "../components/OurServices";
+import LastWorks from "../components/LastWorks";
+import WhyChooseUs from "../components/WhyChooseUs";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -32,21 +37,30 @@ const Home = () => {
         <SellCar />
       </section>
 
-       <section id="latestVehiclesSectionId">
+      <section id="latestVehiclesSectionId">
         <LatestVehicles />
       </section>
 
-      <section id="stock">
-        <h2>Stock</h2>
+      <section id="AllVehiclesSectionId">
+        <AllVehicles />
       </section>
 
-      <section id="cotiza">
-        <h2>Cotizá tu auto</h2>
+      <section id="OurServicesSectionId">
+        <OurServices />
       </section>
 
-      <section id="contacto">
-        <h2>Contacto</h2>
+      <section id="LastWorksSectionId">
+        <LastWorks />
       </section>
+
+      <section id="WhyChooseUsSectionId">
+        <WhyChooseUs />
+      </section>
+
+      <section id="FooterSectionId">
+        <Footer />
+      </section>
+
     </>
   );
 };

@@ -24,7 +24,7 @@
   position: absolute;
   width: 100%; /* ahora ocupa solo el ancho del h2 */
   height: 2px;
-  background-color: #00d9f4;
+  background-color: #ac1f1d;
 }
 
 /* primera linea justo abajo del titulo */
@@ -86,15 +86,15 @@
 .next-vehicle-info p {
   margin-bottom: 5px;
   font-size: 0.95rem;
-  color: #cdf26a;
+  color: #fff;
   /* acento secundario */
 }
 
 .next-vehicle-btn {
   margin-top: 10px;
   padding: 10px 20px;
-  background-color: #00d9f4;
-  color: #000;
+  background-color: #ac1f1d;
+  color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -103,6 +103,6 @@
 }
 
 .next-vehicle-btn:hover {
-  background-color: #00b8d1;
+  background-color: #ac1f1d;
   transform: scale(1.05);
 }

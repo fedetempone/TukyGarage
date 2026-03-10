@@ -31,7 +31,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background-color: #00d9f4;
+  background-color: #ac1f1d;
 }
 
 /* primera linea justo abajo del titulo */
@@ -62,13 +62,13 @@
 
 .how-we-work-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 0 40px #00d9f4;
+  box-shadow: 0 0 40px #ac1f1d;
 }
 
 /* icono */
 .how-we-work-icon {
   margin-bottom: 20px;
-  color: #00d9f4;
+  color: #ac1f1d;
   display: flex;
   justify-content: center;
   align-items: center;

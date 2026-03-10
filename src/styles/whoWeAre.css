@@ -28,7 +28,7 @@
   height: 250px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 0 25px #00d9f4;
+  box-shadow: 0 0 25px #ac1f1d;
   transition: transform 6s ease; 
 }
 
@@ -60,7 +60,7 @@
   content: "";
   position: absolute;
   height: 2px;
-  background-color: #00d9f4;
+  background-color: #ac1f1d;
   left: 0;
   right: 0;
 }

@@ -1,0 +1,110 @@
+/* footer con parallax de fondo */
+.footer-section{
+  width:100%;
+  background: url("https://stellantis3.dam-broadcast.com/medias/domain12808/media100504/151270-u2odarsu87-whr.jpg")
+    center center / cover no-repeat fixed;
+  position: relative;
+  color:#fff;
+  font-family:'Inter',sans-serif;
+}
+
+/* overlay oscuro para legibilidad */
+.footer-overlay{
+  background: rgba(0,0,0,0.65);
+  padding:80px 20px 40px;
+}
+
+/* layout 3 columnas */
+.footer-container{
+  max-width:1400px;
+  margin:0 auto;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:30px;
+}
+
+/* columna logo */
+.footer-logo-col img{
+  width:180px;
+  object-fit:contain;
+}
+
+/* columna contacto + redes */
+.footer-contact-col h4{
+  margin-bottom:12px;
+  font-weight:700;
+}
+
+.footer-contact-col ul{
+  list-style:none;
+  padding:0;
+  margin-bottom:20px;
+}
+
+.footer-contact-col li{
+  margin-bottom:10px;
+}
+
+.footer-socials li a{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#fff;
+  text-decoration:none;
+  transition:all .25s ease;
+}
+
+.footer-socials li a:hover{
+  color:#ac1f1d;
+}
+
+/* columna secciones */
+.footer-links-col h4{
+  margin-bottom:12px;
+  font-weight:700;
+}
+
+.footer-links-col ul{
+  list-style:none;
+  padding:0;
+}
+
+.footer-links-col li{
+  margin-bottom:8px;
+}
+
+.footer-links-col a{
+  color:#fff;
+  text-decoration:none;
+  transition:all .25s ease;
+}
+.footer-links-col a:hover{
+  color:#ac1f1d;
+}
+
+/* copyright centrado al final */
+.footer-bottom{
+  text-align:center;
+  margin-top:40px;
+  font-size:.95rem;
+  color:#ccc;
+}
+
+.footer-col a{
+    text-decoration: none;
+    color: #fff;
+
+}
+
+/* responsive */
+@media(max-width:768px){
+  .footer-container{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .footer-col{
+    margin-bottom:20px;
+  }
+}
