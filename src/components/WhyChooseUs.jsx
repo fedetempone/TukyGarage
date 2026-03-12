@@ -57,7 +57,7 @@ const WhyChooseUs = () => {
               className={`whychooseus-card ${visible[i] ? "visible" : ""}`}
             >
               <div className="whychooseus-icon">{reason.icon}</div>
-              <h3 className="whychooseus-name">{reason.title}</h3>
+              <h5 className="whychooseus-name">{reason.title}</h5>
               <p className="whychooseus-desc">{reason.description}</p>
             </div>
           ))}

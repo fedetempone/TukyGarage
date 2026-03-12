@@ -94,7 +94,7 @@
   .hero-text p { font-size: clamp(1.2rem, 2vw, 2vh); }
 }
 
-/* en iOS el 'background-attachment: fixed' a veces no anda bien. */
+/* en iOS el background-attachment: fixed a veces no anda bien. */
 @supports (-webkit-touch-callout: none) {
   .hero-section {
     background-attachment: scroll;

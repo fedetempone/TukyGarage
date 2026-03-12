@@ -32,7 +32,7 @@ const HowWeWork = () => {
           {workItems.map((item, index) => (
             <div key={index} className="how-we-work-card">
               <div className="how-we-work-icon">{item.icon}</div>
-              <h3>{item.title}</h3>
+              <h5>{item.title}</h5>
               <p>{item.description}</p>
             </div>
           ))}

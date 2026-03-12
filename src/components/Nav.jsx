@@ -51,7 +51,7 @@ const Nav = () => {
         {/* logo */}
         <div className="logo-container">
           <img 
-            src="/img/logoTukyGarageOriginalTransparentResized.png" 
+            src="/img/logoFullTransparent.png" 
             alt="Tuky Garage Logo" 
           />
         </div>

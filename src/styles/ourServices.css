@@ -1,30 +1,48 @@
-/* seccion fondo rojo */
+/* seccion principal */
 .ourservices-section{
   width:100%;
   padding:80px 20px;
-  background:#ac1f1d;
-  color:#fff;
+  background:#ac1f1d; 
+  color:#fff; 
 }
 
 /* contenedor central */
 .ourservices-container{
   max-width:1400px;
   margin:0 auto;
-  text-align:center;
+  text-align:center; /
 }
 
-/* titulo */
+/* titulo con doble subrayado */
 .ourservices-title{
-  margin-bottom:20px;
+  position: relative;
+  display: inline-block;  
+  margin-bottom:50px;
+  color:#fff;
+  font-size:2rem;
+  font-weight:700;
 }
 
-/* decoracion subtitulo */
-.ourservices-decoration{
-  width:60px;
-  height:4px;
-  background:#fff;
-  margin:0 auto 50px auto;
-  border-radius:2px;
+/* pseudo-elementos para doble subrayado */
+.ourservices-title::before,
+.ourservices-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 1px;
+}
+
+/* primera linea abajo del texto  h2*/
+.ourservices-title::before {
+  bottom: -6px;
+}
+
+/* segunda linea abajo del texto  h2 */
+.ourservices-title::after {
+  bottom: -10px;
 }
 
 /* grid responsive */
@@ -36,40 +54,56 @@
 
 /* card individual */
 .ourservices-card{
-  background:rgba(255,255,255,0.05);
-  padding:28px 20px;
-  border-radius:12px;
-  transition:transform .3s ease, box-shadow .3s ease;
-  cursor:pointer;
+  background: rgba(255,255,255,0.03);
+  padding: 28px 20px;
+  border-radius: 12px;
+  opacity: 1;           
+  transform: translateY(0); 
+  transition: none;     
 }
 
-/* hover premium */
-.ourservices-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 30px rgba(0,0,0,0.25);
+/* fade-in  */
+.ourservices-card.visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
 /* icono */
 .ourservices-icon{
-  color:#fff;
+  color:#fff; 
   margin-bottom:16px;
-  transition:transform .3s ease, color .3s ease;
+  transition:transform .3s ease;
 }
 
-/* efecto hover icono */
+/* tamaño de los SVG */
+.ourservices-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+/* hover icono */
 .ourservices-card:hover .ourservices-icon{
   transform:scale(1.2);
-  color:#cdf26a;
 }
 
-/* nombre servicio */
+/* nombre */
 .ourservices-name{
   margin-bottom:12px;
+  word-wrap: break-word;
+  font-weight:600;
 }
 
-/* descripcion */
+/* descripción */
 .ourservices-desc{
-  opacity:.9;
-  line-height:1.5;
   font-size:1rem;
+  opacity:.85;
+  line-height:1.5;
+  color:#fff; 
+}
+
+/* responsive */
+@media(max-width:768px){
+  .ourservices-card{
+    padding:20px 16px;
+  }
 }

@@ -14,7 +14,7 @@ html, body {
   color: #fff;
 }
 
-/* cualquier elemento fixed o absolute que pueda romper */
+/* cualquier elemento fixed o absolute que pueda desbordar */
 body > * {
   max-width: 100vw;
   box-sizing: border-box;
@@ -45,7 +45,6 @@ h6 { font-size: clamp(1rem, 2.5vw, 1.5rem); }
 /* fuente de botones */
 button, .btn {
   font-family: 'Lexend Deca', sans-serif;
-  text-transform: uppercase;
   letter-spacing: 1px;
   font-size: clamp(0.9rem, 2vw, 1rem);
   cursor: pointer;

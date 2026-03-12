@@ -47,7 +47,7 @@
 .who-we-are-text h2 {
   font-size: clamp(2rem, 4vw, 3.5vh);
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   text-transform: uppercase;
   letter-spacing: 2px;
   position: relative;

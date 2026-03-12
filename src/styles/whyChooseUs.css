@@ -10,12 +10,39 @@
 .whychooseus-container{
   max-width:1400px;
   margin:0 auto;
-  text-align:center;
+  text-align:center; 
 }
 
-/* titulo */
+/* titulo centrado con doble subrayado */
 .whychooseus-title{
+  position: relative;
+  display: inline-block; 
   margin-bottom:50px;
+  font-size:2rem;
+  font-weight:700;
+  color:#111;
+}
+
+/* pseudo-elementos para doble subrayado */
+.whychooseus-title::before,
+.whychooseus-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ac1f1d; /* rojo */
+  border-radius: 1px;
+}
+
+/* primera linea abajo del texto h2 */
+.whychooseus-title::before {
+  bottom: -6px;
+}
+
+/* segunda linea abajo del texto h2 */
+.whychooseus-title::after {
+  bottom: -10px;
 }
 
 /* grid responsive */
@@ -35,7 +62,7 @@
   transition:all 0.8s ease;
 }
 
-/* fade-in cuando visible */
+/* fade-in  */
 .whychooseus-card.visible{
   opacity:1;
   transform:translateY(0);
@@ -56,7 +83,7 @@
 /* nombre */
 .whychooseus-name{
   margin-bottom:12px;
-  font-weight:600;
+  word-wrap: break-word; 
 }
 
 /* descripcion */
@@ -66,7 +93,7 @@
   line-height:1.5;
 }
 
-/* responsive */
+/* RESPONSIVE */
 @media(max-width:768px){
   .whychooseus-card{
     padding:20px 16px;

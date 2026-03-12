@@ -14,12 +14,12 @@ const Footer = () => {
 
         <div className="footer-container">
 
-          {/* columna 1: logo */}
+          {/* IZQUIERDA: logo */}
           <div className="footer-col footer-logo-col">
             <img src={logo} alt="Tuky Garage Logo" />
           </div>
 
-          {/* columna 2: contacto + redes */}
+          {/* CENTRO: contacto + redes */}
           <div className="footer-col footer-contact-col">
             <h4>Contacto</h4>
             <ul>
@@ -27,8 +27,8 @@ const Footer = () => {
             </ul>
 
             <h4>Ubicación</h4>
-                        <ul>
-              <li><a href="#location">📍 Av. Siempre Viva 742, Springield</a></li>
+            <ul>
+              <li><a href="#location">📍 Av. Siempre Viva 742, Springfield</a></li>
             </ul>
 
             <h4>Redes</h4>
@@ -60,7 +60,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* columna 3: secciones */}
+          {/* DERECHA: secciones/políticas */}
           <div className="footer-col footer-links-col">
             <h4>Secciones & Políticas</h4>
             <ul>
@@ -80,9 +80,11 @@ const Footer = () => {
 
         </div>
 
-        {/* copyright centrado */}
+        {/* COPYRIGHT */}
+        <hr style={{ width: "50%", margin: "35px auto" }} />
         <div className="footer-bottom">
-          <p>© Created by FedeTempone</p>
+          <p>© 2026 <a href="#">TUKY GARAGE</a>. Todos los derechos reservados.</p>
+          <p>Design by <a href="/">FedeTempone</a></p>
         </div>
 
       </div>

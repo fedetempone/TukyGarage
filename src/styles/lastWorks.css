@@ -1,4 +1,4 @@
-/* seccion */
+/* seccion fondo negro */
 .lastworks-section{
   width:100%;
   padding:80px 20px;
@@ -11,12 +11,39 @@
   max-width:1400px;
   margin:0 auto;
   position:relative;
-  text-align:center;
+  text-align:center; 
 }
 
-/* titulo */
+/* titulo centrado con doble subrayado */
 .lastworks-title{
+  position: relative;
+  display: inline-block; 
   margin-bottom:50px;
+  color:#fff;
+  font-size:2rem;
+  font-weight:700;
+}
+
+/* pseudo-elementos para doble subrayado */
+.lastworks-title::before,
+.lastworks-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ac1f1d; 
+  border-radius: 1px;
+}
+
+/* primera liena abajo del h2 */
+.lastworks-title::before {
+  bottom: -6px;
+}
+
+/* segunda línea abajo del h2  */
+.lastworks-title::after {
+  bottom: -10px;
 }
 
 /* carousel */
@@ -64,7 +91,7 @@
   padding:8px;
   border-radius:50%;
   cursor:pointer;
-  color:#ac1f1d;
+  color:#fff;
   transition:all 0.3s ease;
   z-index:10;
 }

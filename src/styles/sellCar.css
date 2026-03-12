@@ -1,6 +1,6 @@
 .sell-car-section {
   width: 100%;
-  background-color: #fff; /* fondo blanco */
+  background-color: #fff; 
   padding: 80px 20px;
   display: flex;
   justify-content: center;
@@ -8,13 +8,13 @@
 
 .sell-car-banner {
   position: relative;
-  width: 100%; /* ocupa todo el width */
-  max-width: 1200px; /* controla tamaño máximo */
+  width: 100%; 
+  max-width: 1200px; 
   height: 400px;
   background-image: url("/img/bannerSellCar.jpg");
   background-position: center;
   background-size: cover;
-  background-attachment: fixed; /* efecto parallax solo desktop/tablet */
+  background-attachment: fixed; 
   display: flex;
   align-items: center;
   border-radius: 12px;
@@ -27,29 +27,29 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* resalta texto */
+  background-color: rgba(0, 0, 0, 0.5); 
   z-index: 1;
 }
 
 .sell-car-text {
   position: relative;
   z-index: 2;
-  text-align: left; /* alineación izquierda */
+  text-align: left; 
   color: #fff;
   padding: 0 40px;
-  max-width: 600px; /* ancho máximo del texto */
+  max-width: 600px; 
 }
 
 .sell-car-text h2 {
   font-size: 2.5rem;
   margin-bottom: 15px;
-  color: #fff; /* acento primario */
+  color: #fff; 
 }
 
 .sell-car-text p {
   font-size: 1.1rem;
   margin-bottom: 30px;
-  color: #fff; /* acento secundario */
+  color: #fff; 
 }
 
 .sell-car-btn {
@@ -67,11 +67,11 @@
   transform: scale(1.05);
 }
 
-/* Mobile: deshabilitamos parallax */
+/* MOBILE: sin parallax */
 @media (max-width: 767px) {
   .sell-car-banner {
-    background-attachment: scroll; /* fondo fijo desactivado */
-    height: 300px; /* reducimos altura para mobile */
+    background-attachment: scroll; 
+    height: 300px; 
   }
 
   .sell-car-text {

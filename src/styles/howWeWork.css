@@ -2,7 +2,8 @@
 .how-we-work-section {
   width: 100%;
   padding: 80px 20px;
-  background-color: rgba(0, 0, 0, 0.95); /* overlay negro */
+  background-color: rgba(0, 0, 0, 0.95);
+  /* overlay negro */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +21,7 @@
 .how-we-work-container h2 {
   margin-bottom: 40px;
   position: relative;
-  display: inline-block; 
+  display: inline-block;
 }
 
 /* subrayado doble debajo del h2 */
@@ -36,12 +37,12 @@
 
 /* primera linea justo abajo del titulo */
 .how-we-work-container h2::before {
-  bottom: -4px; 
+  bottom: -4px;
 }
 
 /* segunda linea 2px mas abajo */
 .how-we-work-container h2::after {
-  bottom: -9px; 
+  bottom: -8px;
 }
 
 /* grid de cards */
@@ -74,9 +75,14 @@
   align-items: center;
 }
 
+.how-we-work-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
 /* parrafos adentro de  las card */
 .how-we-work-card p {
-  font-family: 'Inter', sans-serif; /* ya lo tenés en global */
+  font-family: 'Inter', sans-serif;
   font-weight: 300;
   font-size: clamp(1rem, 2.5vw, 2vh);
   line-height: 1.6;
@@ -90,6 +96,7 @@
   .how-we-work-grid {
     grid-template-columns: 1fr;
   }
+
   .how-we-work-card {
     padding: 20px 15px;
   }
