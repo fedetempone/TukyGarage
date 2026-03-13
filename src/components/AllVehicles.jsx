@@ -1,12 +1,13 @@
+import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import "../styles/allVehicles.css";
-import { Calendar, Gauge } from "lucide-react";
+import { Calendar, Gauge, ChevronRight } from "lucide-react";
 
 import car1 from "/img/car1.avif";
 import car2 from "/img/car2.avif";
 import car3 from "/img/car3.avif";
 import car4 from "/img/car4.avif";
 
-/* data de ejemplo */
 const vehicles = [
   { id: 1, name: "Peugeot 308", year: 2019, km: "65.000 km", img: car1 },
   { id: 2, name: "Toyota Corolla", year: 2021, km: "32.000 km", img: car2 },
@@ -17,60 +18,90 @@ const vehicles = [
 ];
 
 const AllVehicles = () => {
-  return (
-    <section className="allvehicles-section">
-      <div className="allvehicles-container">
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollDir, setScrollDir] = useState("down");
+  const sectionRef = useRef(null);
+  const lastScrollY = useRef(0);
 
-        {/* titulo */}
-        <h2 className="allvehicles-title">
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollDir(currentScrollY > lastScrollY.current ? "down" : "up");
+      lastScrollY.current = currentScrollY;
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
+
+  const createSlug = (name) => name.toLowerCase().replace(/\s+/g, "-");
+
+  return (
+    <section className="allvehicles-section" ref={sectionRef}>
+      <div className="allvehicles-container">
+        <h2 className={`allvehicles-title ${isVisible ? "animate-in" : "animate-out"}`}>
           Nuestro stock
         </h2>
 
-        {/* grid vehiculos */}
         <div className="allvehicles-grid">
-
-          {vehicles.map((vehicle) => (
-            <div key={vehicle.id} className="allvehicles-card">
-
-              {/* imagen */}
-              <img
-                src={vehicle.img}
-                alt={vehicle.name}
-                className="allvehicles-image"
-              />
-
-              {/* info vehiculo */}
-              <div className="allvehicles-cardinfo">
-
-                <h3 className="allvehicles-name">
-                  {vehicle.name}
-                </h3>
-
-                {/* año */}
-                <div className="allvehicles-spec">
-                  <Calendar className="allvehicles-icon"/>
-                  <span>{vehicle.year}</span>
+          {vehicles.map((vehicle, index) => (
+            <Link 
+              to={`/vehiculos/${createSlug(vehicle.name)}`} 
+              key={vehicle.id} 
+              className={`allvehicles-card ${isVisible ? "animate-in" : "animate-out"} ${scrollDir}`}
+              style={{ "--index": index }}
+            >
+              <div className="allvehicles-img-wrapper">
+                <img
+                  src={vehicle.img}
+                  alt={vehicle.name}
+                  className="allvehicles-image"
+                />
+                <div className="allvehicles-overlay">
+                  <span className="allvehicles-view-more">Ver Detalle</span>
                 </div>
-
-                {/* kilometraje */}
-                <div className="allvehicles-spec">
-                  <Gauge className="allvehicles-icon"/>
-                  <span>{vehicle.km}</span>
-                </div>
-
               </div>
-            </div>
+
+              <div className="allvehicles-cardinfo">
+                <div className="allvehicles-header-card">
+                  <h3 className="allvehicles-name">{vehicle.name}</h3>
+                  <ChevronRight className="allvehicles-arrow" size={20} />
+                </div>
+                
+                <div className="allvehicles-specs-row">
+                  <div className="allvehicles-spec">
+                    <Calendar className="allvehicles-icon" size={18}/>
+                    <span>{vehicle.year}</span>
+                  </div>
+                  <div className="allvehicles-spec">
+                    <Gauge className="allvehicles-icon" size={18}/>
+                    <span>{vehicle.km}</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
           ))}
-
         </div>
 
-        {/* boton final */}
-        <div className="allvehicles-buttonwrapper">
-          <button className="allvehicles-button">
-            Ver todos los vehículos
-          </button>
+        {/* boton epico acoplado */}
+        <div className={`allvehicles-buttonwrapper ${isVisible ? "animate-in" : "animate-out"}`}>
+          <Link to="/stock" className="allvehicles-cta-link">
+            <button className="allvehicles-button">
+              <span className="button-text">Ver todos los vehículos</span>
+              <img src="/img/carButton.png" alt="car" className="button-car" />
+            </button>
+          </Link>
         </div>
-
       </div>
     </section>
   );

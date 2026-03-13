@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/latestVehicles.css";
 
 const latestVehiclesData = [
@@ -10,46 +10,123 @@ const latestVehiclesData = [
 ];
 
 const LatestVehicles = () => {
-  const scrollRef = useRef(null);
+  /* clones para loop infinito */
+  const extendedData = [
+    latestVehiclesData[latestVehiclesData.length - 1],
+    ...latestVehiclesData,
+    latestVehiclesData[0]
+  ];
 
-  const scroll = (direction) => {
-    const { current } = scrollRef;
-    const scrollAmount = 300; // Ajusta según el ancho de tu card
-    if (direction === "left") {
-      current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    } else {
-      current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
+  const [activeIndex, setActiveIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const lock = useRef(false);
+  
+  /* refs para gestos mobile */
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
+  const nextSlide = () => {
+    if (lock.current) return;
+    lock.current = true;
+    setActiveIndex((prev) => prev + 1);
   };
+
+  const prevSlide = () => {
+    if (lock.current) return;
+    lock.current = true;
+    setActiveIndex((prev) => prev - 1);
+  };
+
+  const handleTransitionEnd = () => {
+    if (activeIndex === extendedData.length - 1) {
+      setIsTransitioning(false);
+      setActiveIndex(1);
+    }
+    if (activeIndex === 0) {
+      setIsTransitioning(false);
+      setActiveIndex(latestVehiclesData.length);
+    }
+    lock.current = false;
+  };
+
+  useEffect(() => {
+    if (!isTransitioning) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsTransitioning(true);
+        });
+      });
+    }
+  }, [isTransitioning]);
+
+  /* funciones para swipe */
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const distance = touchStartX.current - touchEndX.current;
+    if (distance > 50) nextSlide();
+    if (distance < -50) prevSlide();
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  /* calculo de ancho segun pantalla */
+  const cardWidth = window.innerWidth <= 500 ? 290 : 330;
 
   return (
     <section id="latestVehiclesSectionId" className="latest-vehicles-section">
       <div className="container">
         <h2 className="latest-vehicles-title">Ultimos Ingresos</h2>
-        
+
         <div className="carousel-wrapper">
-          {/* Flecha Izquierda */}
-          <button className="nav-arrow left-arrow" onClick={() => scroll("left")}>
+          <button className="nav-arrow left-arrow" onClick={prevSlide}>
             <span className="arrow-icon">‹</span>
           </button>
 
-          {/* Contenedor del Scroll */}
-          <div className="latest-vehicles-carousel" ref={scrollRef}>
-            {latestVehiclesData.map((vehicle) => (
-              <div key={vehicle.id} className="latest-vehicle-card">
-                <div className="img-container">
-                  <img src={vehicle.image} alt={vehicle.brand} className="latest-vehicle-img" />
-                </div>
-                <div className="latest-vehicle-info">
-                  <p className="vehicle-name">{vehicle.brand} {vehicle.model}</p>
-                  <p className="vehicle-price">$ {vehicle.price.toLocaleString("es-AR")}</p>
-                </div>
-              </div>
-            ))}
+          <div 
+            className="latest-vehicles-carousel"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              className="carousel-track"
+              onTransitionEnd={handleTransitionEnd}
+              style={{
+                transform: `translateX(calc(-${activeIndex * cardWidth}px + 50% - ${cardWidth / 2}px))`,
+                transition: isTransitioning ? "transform 0.6s cubic-bezier(0.25,1,0.5,1)" : "none"
+              }}
+            >
+              {extendedData.map((vehicle, index) => {
+                const realIndex = index === 0 ? latestVehiclesData.length : index === extendedData.length - 1 ? 1 : index;
+                const isCenter = realIndex === activeIndex;
+
+                return (
+                  <div
+                    key={`${vehicle.id}-${index}`}
+                    className={`latest-vehicle-card ${isCenter ? "card-active" : ""}`}
+                  >
+                    <div className="img-container">
+                      <img src={vehicle.image} alt={vehicle.brand} className="latest-vehicle-img" />
+                    </div>
+                    <div className="latest-vehicle-info">
+                      <p className="vehicle-name">{vehicle.brand} {vehicle.model}</p>
+                      <p className="vehicle-price">$ {vehicle.price.toLocaleString("es-AR")}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Flecha Derecha */}
-          <button className="nav-arrow right-arrow" onClick={() => scroll("right")}>
+          <button className="nav-arrow right-arrow" onClick={nextSlide}>
             <span className="arrow-icon">›</span>
           </button>
         </div>

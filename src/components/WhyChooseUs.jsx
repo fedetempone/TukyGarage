@@ -1,60 +1,73 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/whyChooseUs.css";
 import { Star, UserCheck, ShieldCheck, Settings } from "lucide-react";
 
 const reasons = [
   {
-    icon: <Star size={48} />,
+    icon: <Star />,
     title: "Experiencia Comprobada",
-    description: "Más de 10 años restaurando y cuidando vehículos con resultados profesionales.",
+    description: "Más de 10 años restaurando y cuidando vehículos con profesionales.",
   },
   {
-    icon: <Settings size={48} />,
+    icon: <Settings />,
     title: "Soluciones Personalizadas",
     description: "Adaptamos cada servicio a las necesidades de tu vehículo y presupuesto.",
   },
   {
-    icon: <ShieldCheck size={48} />,
+    icon: <ShieldCheck />,
     title: "Transparencia Garantizada",
     description: "Presupuestos claros y seguimiento constante de cada trabajo realizado.",
   },
   {
-    icon: <UserCheck size={48} />,
+    icon: <UserCheck />,
     title: "Atención Cercana",
     description: "Nuestro equipo te acompaña en cada paso, asegurando tu satisfacción total.",
   },
 ];
 
 const WhyChooseUs = () => {
-  const [visible, setVisible] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollDir, setScrollDir] = useState("down");
+  const sectionRef = useRef(null);
+  const lastScrollY = useRef(0);
 
-  // efecto fade-in al scroll
   useEffect(() => {
     const handleScroll = () => {
-      const newVisible = reasons.map((_, i) => {
-        const el = document.getElementById(`reason-${i}`);
-        if (!el) return false;
-        const rect = el.getBoundingClientRect();
-        return rect.top < window.innerHeight - 50; // entra en pantalla
-      });
-      setVisible(newVisible);
+      const currentScrollY = window.scrollY;
+      setScrollDir(currentScrollY > lastScrollY.current ? "down" : "up");
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
   }, []);
 
   return (
-    <section className="whychooseus-section">
+    <section className="whychooseus-section" ref={sectionRef}>
       <div className="whychooseus-container">
-        <h2 className="whychooseus-title">Por Qué Elegirnos</h2>
+        <h2 className={`whychooseus-title ${isVisible ? "animate-in" : "animate-out"}`}>
+          <span>Por Qué Elegirnos</span>
+        </h2>
+
         <div className="whychooseus-grid">
-          {reasons.map((reason, i) => (
-            <div
-              id={`reason-${i}`}
-              key={i}
-              className={`whychooseus-card ${visible[i] ? "visible" : ""}`}
+          {reasons.map((reason, index) => (
+            <div 
+              key={index} 
+              className={`whychooseus-card ${isVisible ? "animate-in" : "animate-out"} ${scrollDir}`}
+              style={{ "--index": index }}
             >
               <div className="whychooseus-icon">{reason.icon}</div>
               <h5 className="whychooseus-name">{reason.title}</h5>

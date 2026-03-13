@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../styles/nav.css";
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showNav, setShowNav] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [bgNav, setBgNav] = useState("transparent"); // background navbar
+  const [bgNav, setBgNav] = useState("transparent");
+
+  const lastScrollY = useRef(0);
+  const timeoutRef = useRef(null);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
@@ -20,29 +22,38 @@ const Nav = () => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
 
-      // primera vez scroll -> fondo negro
-      if (currentScroll > 50 && bgNav === "transparent") {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+
+      // manejo del fondo
+      if (currentScroll > 50) {
         setBgNav("#000");
-      }
-
-      // scroll down -> hide nav
-      if (currentScroll > lastScrollY && currentScroll > 100) {
-        setShowNav(false);
       } else {
-        setShowNav(true);
-      }
-
-      // si llegamos al top -> background transparente
-      if (currentScroll <= 10) {
         setBgNav("transparent");
       }
 
-      setLastScrollY(currentScroll);
+      // logica de mostrar/ocultar
+      if (currentScroll <= 10) {
+        setShowNav(true);
+      } else if (currentScroll < lastScrollY.current) {
+        setShowNav(true);
+        timeoutRef.current = setTimeout(() => {
+          setShowNav(false);
+        }, 1000);
+      } else {
+        setShowNav(false);
+      }
+
+      lastScrollY.current = currentScroll;
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, bgNav]);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   return (
     <nav className={`navbar ${showNav ? "show" : "hide"}`} style={{ backgroundColor: bgNav }}>
@@ -64,10 +75,13 @@ const Nav = () => {
           <li><a href="#contacto">Contacto</a></li>
         </ul>
 
-        {/* boton principal cta */}
+        {/* boton principal con efecto auto */}
         <div className="cta-desktop">
           <a href="#cotiza">
-            <button className="cta-button">Quiero vender</button>
+            <button className="cta-button">
+              <span className="button-text">Quiero vender</span>
+              <img src="https://i.imgur.com/X9P8OyS.png" alt="car" className="button-car" />
+            </button>
           </a>
         </div>
 
@@ -91,7 +105,10 @@ const Nav = () => {
           <li><a href="#contacto" onClick={closeMenu}>Contacto</a></li>
           <li>
             <a href="#cotiza" onClick={closeMenu}>
-              <button className="cta-nav-button">Quiero vender</button>
+              <button className="cta-nav-button">
+                <span className="button-text">Quiero vender</span>
+                <img src="/img/carButton.png" alt="car" className="button-car" />
+              </button>
             </a>
           </li>
         </ul>

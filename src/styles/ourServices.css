@@ -1,29 +1,39 @@
 /* seccion principal */
-.ourservices-section{
-  width:100%;
-  padding:80px 20px;
-  background:#ac1f1d; 
-  color:#fff; 
+.ourservices-section {
+  width: 100%;
+  padding: 100px 20px;
+  background: #ac1f1d; 
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* contenedor central */
-.ourservices-container{
-  max-width:1400px;
-  margin:0 auto;
-  text-align:center; /
+.ourservices-container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
 }
 
-/* titulo con doble subrayado */
-.ourservices-title{
+/* titulo con doble subrayado blanco */
+.ourservices-title {
   position: relative;
-  display: inline-block;  
-  margin-bottom:50px;
-  color:#fff;
-  font-size:2rem;
-  font-weight:700;
+  display: inline-block;
+  margin-bottom: 70px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0;
+  transition: opacity 1.5s ease;
 }
 
-/* pseudo-elementos para doble subrayado */
+.ourservices-title.animate-in {
+  opacity: 1;
+}
+
 .ourservices-title::before,
 .ourservices-title::after {
   content: "";
@@ -32,78 +42,92 @@
   width: 100%;
   height: 2px;
   background-color: #fff;
-  border-radius: 1px;
 }
 
-/* primera linea abajo del texto  h2*/
-.ourservices-title::before {
-  bottom: -6px;
-}
-
-/* segunda linea abajo del texto  h2 */
-.ourservices-title::after {
-  bottom: -10px;
-}
+.ourservices-title::before { bottom: -10px; }
+.ourservices-title::after { bottom: -15px; }
 
 /* grid responsive */
-.ourservices-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:32px;
+.ourservices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
 }
 
-/* card individual */
-.ourservices-card{
-  background: rgba(255,255,255,0.03);
-  padding: 28px 20px;
-  border-radius: 12px;
-  opacity: 1;           
-  transform: translateY(0); 
-  transition: none;     
+/* card individual con efecto pro */
+.ourservices-card {
+  background: rgba(255, 255, 255, 0.05); 
+  backdrop-filter: blur(5px);
+  padding: 40px 25px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  /* transicion de entrada suave en cascada */
+  transition: 
+    transform 1.8s cubic-bezier(0.2, 0.8, 0.2, 1), 
+    opacity 1.5s ease-out,
+    background 0.3s ease;
+  transition-delay: calc(var(--index) * 0.15s);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* fade-in  */
-.ourservices-card.visible{
-  opacity:1;
-  transform:translateY(0);
+/* direccion del scroll para el efecto parallax */
+.ourservices-card.down { transform: translateY(120px); }
+.ourservices-card.up { transform: translateY(-120px); }
+
+.ourservices-card.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ourservices-card.animate-out {
+  opacity: 0;
+  transition: none; 
+}
+
+/* hover premium */
+.ourservices-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-10px) !important;
 }
 
 /* icono */
-.ourservices-icon{
-  color:#fff; 
-  margin-bottom:16px;
-  transition:transform .3s ease;
+.ourservices-icon {
+  color: #fff; 
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* tamaño de los SVG */
 .ourservices-icon svg {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
 }
 
-/* hover icono */
-.ourservices-card:hover .ourservices-icon{
-  transform:scale(1.2);
+.ourservices-card:hover .ourservices-icon {
+  transform: scale(1.2) rotate(5deg);
 }
 
-/* nombre */
-.ourservices-name{
-  margin-bottom:12px;
-  word-wrap: break-word;
-  font-weight:600;
+/* nombre y texto */
+.ourservices-name {
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* descripción */
-.ourservices-desc{
-  font-size:1rem;
-  opacity:.85;
-  line-height:1.5;
-  color:#fff; 
+.ourservices-desc {
+  opacity: 0.9;
+  font-weight: 300;
 }
 
 /* responsive */
-@media(max-width:768px){
-  .ourservices-card{
-    padding:20px 16px;
-  }
+@media (max-width: 768px) {
+  .ourservices-section { padding: 60px 20px; }
+  .ourservices-card { padding: 30px 20px; }
+  .ourservices-title { margin-bottom: 50px; }
 }

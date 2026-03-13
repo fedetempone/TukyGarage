@@ -1,31 +1,56 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../styles/whoWeAre.css";
 
 const WhoWeAre = () => {
   const [rotate, setRotate] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollDir, setScrollDir] = useState("down");
+  const sectionRef = useRef(null);
+  const lastScrollY = useRef(0);
 
+  // giro de la foto
   useEffect(() => {
-    // Giro inicial 
     setRotate(true);
-    const initialTimeout = setTimeout(() => setRotate(false), 8000); // duración del giro
-
-    // Intervalo para giros 
+    const initialTimeout = setTimeout(() => setRotate(false), 8000);
     const interval = setInterval(() => {
       setRotate(true);
       setTimeout(() => setRotate(false), 8000);
     }, 10000);
 
-    // Limpieza de timers
     return () => {
       clearTimeout(initialTimeout);
       clearInterval(interval);
     };
   }, []);
 
+  // detector de scroll y entrada a la seccion
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollDir(currentScrollY > lastScrollY.current ? "down" : "up");
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // se activa apenas asoma un poquito
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
+
   return (
-    <section className="who-we-are-section">
+    <section className="who-we-are-section" ref={sectionRef}>
       <div className="who-we-are-container">
-        {/* Imagen circular */}
         <div className="who-we-are-img-wrapper">
           <img
             src="/img/whoWeAre.jpg"
@@ -34,11 +59,12 @@ const WhoWeAre = () => {
           />
         </div>
 
-        {/* Texto */}
-        <div className="who-we-are-text">
+        <div 
+          className={`who-we-are-text ${isVisible ? "animate-in" : "animate-out"} ${scrollDir}`}
+        >
           <h2>¿Quiénes Somos?</h2>
           <p>
-            Somos Matías y Ema, y en Tuky Garage transformamos la compra y venta
+            Somos Emanuel y Matias, y en Tuky Garage transformamos la compra y venta
             de autos en una experiencia de confianza. No solo movemos stock:
             seleccionamos cada unidad bajo estándares rigurosos.
           </p>
@@ -49,7 +75,7 @@ const WhoWeAre = () => {
             listo para disfrutar.
           </p>
           <p>
-            Transparencia, calidad y fierros seleccionados. Tu próximo auto está
+            Transparencia, calidad y vehiculos seleccionados. Tu próximo auto está
             acá.
           </p>
         </div>

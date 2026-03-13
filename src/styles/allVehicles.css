@@ -1,27 +1,31 @@
-/* seccion fondo negro */
-.allvehicles-section{
-  width:100%;
-  padding:80px 20px;
-  background:#000;
+/* seccion principal */
+.allvehicles-section {
+  width: 100%;
+  padding: 100px 20px;
+  background: #000;
+  overflow: hidden;
 }
 
-/* contenedor central */
 .allvehicles-container {
   max-width: 1400px;
   margin: 0 auto;
-  position: relative; 
-  text-align: center; 
+  text-align: center;
 }
 
-/* titulo centrado con doble subrayado */
+/* titulo con doble linea roja */
 .allvehicles-title {
-  display: inline-block;   
-  position: relative;      
-  margin-bottom: 50px;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 70px;
   color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  opacity: 0;
+  transition: opacity 1.5s ease;
 }
 
-/* para el doble subrayado */
+.allvehicles-title.animate-in { opacity: 1; }
+
 .allvehicles-title::before,
 .allvehicles-title::after {
   content: "";
@@ -30,104 +34,236 @@
   width: 100%;
   height: 2px;
   background-color: #ac1f1d;
-  border-radius: 1px;
 }
 
-/* subrayado abajo del h2 primera linea*/
-.allvehicles-title::before {
-  bottom: -6px;
+.allvehicles-title::before { bottom: -12px; }
+.allvehicles-title::after { bottom: -18px; }
+
+/* grid */
+.allvehicles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
 }
 
-/* subrayado abajo del h2 segunda linea */
-.allvehicles-title::after {
-  bottom: -10px;
+/* card como link */
+.allvehicles-card {
+  text-decoration: none; 
+  position: relative;
+  background: #0a0a0a;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #1a1a1a;
+  opacity: 0;
+  transition: transform 2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 1.5s ease-out, border-color 0.4s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-/* grid responsive */
-.allvehicles-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
+.allvehicles-card.down { transform: translateY(150px); }
+.allvehicles-card.up { transform: translateY(-150px); }
+
+.allvehicles-card.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* card vehiculo */
-.allvehicles-card{
-  position:relative;
-  overflow:hidden;
-  border-radius:12px;
-  cursor:pointer;
-  background:#111;
-  transition:transform .3s ease, box-shadow .3s ease;
+/* imagen y efectos */
+.allvehicles-img-wrapper {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
 }
 
-/* hover premium */
-.allvehicles-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 15px 40px rgba(172,31,29,0.35); 
+.allvehicles-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* imagen */
-.allvehicles-image{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  display:block;
-  transition:transform .35s ease;
+.allvehicles-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 40%, rgba(172, 31, 29, 0.4));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-/* zoom imagen */
-.allvehicles-card:hover .allvehicles-image{
-  transform:scale(1.05);
+.allvehicles-view-more {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem; 
+  border: 1px solid #ac1f1d;
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
 }
 
-/* bloque info */
-.allvehicles-cardinfo{
-  text-align: justify;
-  padding:18px;
+/* hover de la card */
+.allvehicles-card:hover {
+  border-color: #ac1f1d;
+  box-shadow: 0 10px 40px rgba(172, 31, 29, 0.25);
 }
 
-/* nombre vehiculo */
-.allvehicles-name{
-  margin-bottom:10px;
+.allvehicles-card:hover .allvehicles-image {
+  transform: scale(1.1);
 }
 
-/* fila de especificacion */
-.allvehicles-spec{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  opacity:.9;
-  margin-bottom:6px;
+.allvehicles-card:hover .allvehicles-overlay {
+  opacity: 1;
 }
 
-/* iconos */
-.allvehicles-icon{
-  width:18px;
-  height:18px;
-  color:#ac1f1d; 
+.allvehicles-card:hover .allvehicles-view-more {
+  transform: translateY(0);
 }
 
-/* contenedor boton */
-.allvehicles-buttonwrapper{
-  width:100%;
-  display:flex;
-  justify-content:center;
-  margin-top:50px;
+/* info del auto */
+.allvehicles-cardinfo {
+  padding: 25px;
+  text-align: left;
 }
 
-/* boton principal */
-.allvehicles-button{
-  background:#ac1f1d; 
-  color:#000;
-  padding:14px 32px;
-  border:none;
-  border-radius:6px;
-  transition:all .25s ease;
+.allvehicles-header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-/* hover boton */
-.allvehicles-button:hover{
-  background:#fff;
-  box-shadow:0 15px 40px rgba(172,31,29,0.35);
-  transform:translateY(-2px);
+.allvehicles-name {
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.allvehicles-arrow {
+  color: #ac1f1d;
+  transition: transform 0.3s ease;
+}
+
+.allvehicles-card:hover .allvehicles-arrow {
+  transform: translateX(5px);
+}
+
+.allvehicles-specs-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #1a1a1a;
+  padding-top: 15px;
+}
+
+.allvehicles-spec {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #888;
+}
+
+.allvehicles-icon {
+  color: #ac1f1d;
+}
+
+/* --- BOTON INTEGRADO --- */
+.allvehicles-buttonwrapper {
+  margin-top: 60px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 1s ease 0.5s;
+  display: flex;
+  justify-content: center;
+}
+
+.allvehicles-buttonwrapper.animate-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.allvehicles-cta-link {
+  text-decoration: none;
+}
+
+.allvehicles-button {
+  min-width: 250px;
+  height: 55px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border-radius: 50px;
+  z-index: 1;
+  background: #ac1f1d; 
+  overflow: hidden;
+  border: 2px solid #ac1f1d;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+/* texto con delay para el auto */
+.button-text {
+  position: relative;
+  z-index: 4;
+  opacity: 1;
+  transition: opacity 0.1s ease, color 0s;
+}
+
+.allvehicles-button:hover .button-text {
+  opacity: 1;
+  color: #000;
+  transition: opacity 0.3s ease 0.8s, color 0s 0.8s;
+}
+
+.allvehicles-button:not(:hover) .button-text {
+  opacity: 1;
+  color: #fff;
+  transition: opacity 0.2s ease;
+}
+
+/* fondo deslizante */
+.allvehicles-button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #fff;
+}
+
+.allvehicles-button:hover::after {
+  width: 100%;
+}
+
+/* el auto */
+.button-car {
+  position: absolute;
+  width: 80px; 
+  height: auto;
+  left: -100px; 
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.allvehicles-button:hover .button-car {
+  transform: translate(400px, -50%); 
 }

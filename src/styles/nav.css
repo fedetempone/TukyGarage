@@ -44,11 +44,6 @@
   position: relative;
 }
 
-/* links estilos */
-.nav-links-wrapper li {
-  position: relative;
-}
-
 .nav-links-wrapper li a {
   color: #fff;
   text-decoration: none;
@@ -58,7 +53,7 @@
   transition: color 0.3s;
 }
 
-/* efecto subrayado */
+/* efecto subrayado bordo */
 .nav-links-wrapper li a::after {
   content: "";
   position: absolute;
@@ -74,43 +69,87 @@
   width: 100%;
 }
 
-/* boton principal cta */
-.cta-button {
-  background-color: #ac1f1d;
-  color: #fff;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 50px;
+/* estilo base botones con efecto auto */
+.cta-button, .cta-nav-button {
+  min-width: 160px;
+  height: 48px;
+  color: #fff; 
   cursor: pointer;
-  font-weight: bold;
   transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border-radius: 50px;
+  z-index: 1;
+  background: #ac1f1d; 
+  overflow: hidden;
+  border: 2px solid #ac1f1d;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cta-button {
   display: none;
 }
 
-.cta-button:hover {
-  background-color: #fff;
-  color: #ac1f1d;
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+/* texto que desaparece y vuelve */
+.button-text {
+  position: relative;
+  z-index: 4;
+  opacity: 1;
+  transition: opacity 0.1s ease, color 0s; 
 }
 
-/* otros botones (mobile) */
-.cta-nav-button {
-  background-color: #ac1f1d;
+.cta-button:hover .button-text, 
+.cta-nav-button:hover .button-text {
+  opacity: 1;
+  color: #000;
+  transition: opacity 0.3s ease 0.8s, color 0s 0.8s; 
+}
+
+.cta-button:not(:hover) .button-text,
+.cta-nav-button:not(:hover) .button-text {
+  opacity: 1;
   color: #fff;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
-.cta-nav-button:hover {
-  background-color: #fff;
-  color: #ac1f1d;
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+/* fondo blanco que desliza */
+.cta-button::after, .cta-nav-button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #fff; 
+}
+
+.cta-button:hover::after, .cta-nav-button:hover::after {
+  width: 100%;
+}
+
+/* el auto */
+.button-car {
+  position: absolute;
+  width: 75px; 
+  height: auto;
+  left: -95px; 
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5; 
+  pointer-events: none;
+}
+
+/* animacion del auto */
+.cta-button:hover .button-car, 
+.cta-nav-button:hover .button-car {
+  transform: translate(290px, -50%); 
 }
 
 /* hamburguesa */
@@ -133,13 +172,9 @@
   transition: all 0.4s ease;
 }
 
-.hamburger-wrapper.active span:nth-child(1) {
-  transform: rotate(46deg) translate(9px, 8px);
-}
+.hamburger-wrapper.active span:nth-child(1) { transform: rotate(46deg) translate(9px, 8px); }
 .hamburger-wrapper.active span:nth-child(2) { opacity: 0; }
-.hamburger-wrapper.active span:nth-child(3) {
-  transform: rotate(-44deg) translate(7px, -7px);
-}
+.hamburger-wrapper.active span:nth-child(3) { transform: rotate(-44deg) translate(7px, -7px); }
 
 /* menu mobile overlay */
 .mobile-menu-wrapper {
@@ -154,9 +189,6 @@
   align-items: center;
   transition: left 0.3s ease;
   z-index: 999;
-  text-align: center;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
 .mobile-menu-wrapper.open { left: 0; }
@@ -167,7 +199,6 @@
   flex-direction: column;
   gap: 30px;
   padding: 0;
-  margin: 0;
 }
 
 .mobile-menu-wrapper ul li a {
@@ -177,23 +208,10 @@
   font-weight: bold;
 }
 
-
-
-
-/* =========================
-   desktop ≥1000px
-========================= */
+/* desktop */
 @media (min-width: 1000px) {
-  .nav-links-wrapper { 
-    display: flex; 
-  }
-  .hamburger-wrapper { 
-    display: none; 
-  }
-  .mobile-menu-wrapper { 
-    display: none; 
-  }
-  .cta-button {
-    display: inline-flex;
-  }
+  .nav-links-wrapper { display: flex; }
+  .hamburger-wrapper { display: none; }
+  .mobile-menu-wrapper { display: none; }
+  .cta-button { display: inline-flex; }
 }
