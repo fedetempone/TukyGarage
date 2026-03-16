@@ -23,22 +23,34 @@ const workItems = [
 const HowWeWork = () => {
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
+  const [scrollDir, setScrollDir] = useState("down");
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollDir(currentScrollY > lastScrollY.current ? "down" : "up");
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
+        setVisible(entry.isIntersecting);
       },
       { threshold: 0.1 }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
+    
     return () => {
+      window.removeEventListener("scroll", handleScroll);
       if (sectionRef.current) observer.unobserve(sectionRef.current);
     };
   }, []);
 
-  /* efecto parallax y brillo en tiempo real */
+  // efecto de inclinacion 3d
   const handleMouseMove = (e) => {
     const card = e.currentTarget;
     const box = card.getBoundingClientRect();
@@ -60,7 +72,6 @@ const HowWeWork = () => {
     });
   };
 
-  /* reset de posicion al salir */
   const handleMouseLeave = (e) => {
     const card = e.currentTarget;
     card.style.setProperty("--rx", "0deg");
@@ -78,12 +89,11 @@ const HowWeWork = () => {
           {workItems.map((item, index) => (
             <div
               key={index}
-              className={`how-we-work-card ${visible ? "animate-in" : ""}`}
-              style={{ "--delay": `${index * 0.15}s` }}
+              className={`how-we-work-card ${visible ? "animate-in" : ""} ${scrollDir}`}
+              style={{ "--delay": `${index * 0.65}s` }} 
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
-              {/* reflejo de luz */}
               <div className="card-glare"></div>
               
               <div className="parallax-content">

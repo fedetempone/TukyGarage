@@ -29,7 +29,7 @@ const LastWorks = () => {
   return (
     <section className="lastworks-section">
       <div className="lastworks-container">
-        <h2 className="lastworks-title">Algunos de nuestros trabajos</h2>
+        <h2 className="lastworks-title">ALGUNOS DE NUESTROS TRABAJOS</h2>
 
         <div className="lastworks-carousel">
           {/* flecha izquierda */}

@@ -2,10 +2,79 @@
 .sell-car-section {
   width: 100%;
   background-color: #fff; 
-  padding: 100px 20px;
+  padding-right: 20px;
+  padding-left: 20px;
   display: flex;
   justify-content: center;
   overflow: hidden;
+
+  position: relative;
+  padding-top: 2px; 
+  z-index: 10;
+}
+
+.sell-car-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, #000 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/*EFECTO DE TRANSICION DIVIDER CORTE ENTRE SECCIONES*/
+.light-trail-divider {
+  position: absolute;
+  top: -2px; 
+  left: 0;
+  width: 100%;
+  height: 4px; 
+  background: #000; 
+  overflow: visible;
+}
+
+/* La luz que corre por el divider */
+
+.car-flare {
+  position: absolute;
+  top: 0;
+  left: -200px;
+  width: 250px; 
+  height: 100%;
+  background: linear-gradient(to right, transparent, var(--accent-color), #fff);
+  box-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color);
+  animation: car-smooth-pass 2.2s infinite ease-in-out;
+}
+
+@keyframes car-smooth-pass {
+  0% { 
+    left: -250px; 
+    opacity: 0; 
+  }
+  10% { 
+    opacity: 1; 
+  }
+  80% { 
+    left: 110%; 
+    opacity: 1; 
+  }
+  85% { 
+    opacity: 0; 
+  }
+  100% { 
+    left: 110%; 
+    opacity: 0; 
+  }
+}
+
+/* delay de la segunda luz  */
+.car-flare.delayed {
+  animation-delay: 1.1s; 
+  opacity: 0.4;
+  height: 2px;
+  top: 1px;
 }
 
 /* banner con efecto parallax */
@@ -88,7 +157,6 @@
   background: #ac1f1d; 
   overflow: hidden;
   border: 2px solid #ac1f1d;
-  text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
 }

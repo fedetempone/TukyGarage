@@ -1,12 +1,14 @@
 /* seccion principal */
 .who-we-are-section {
   width: 100%;
-  padding: 100px 20px;
+  padding: 200px 20px;
   background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden; 
+  position: relative;
+  z-index: 1;
 }
 
 .who-we-are-container {
@@ -20,6 +22,8 @@
 /* wrapper para el efecto 3d de la foto */
 .who-we-are-img-wrapper {
   perspective: 1000px;
+  position: relative;
+  z-index: 10; 
 }
 
 .who-we-are-img {
@@ -94,7 +98,10 @@
 /* mobile hasta 500px */
 @media (max-width: 500px) {
   .who-we-are-section { padding: 60px 20px; }
-  .who-we-are-img { width: 180px; height: 180px; }
+  .who-we-are-img {
+    transform: translateY(20px); 
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); 
+  }
   .who-we-are-text h2 { margin-bottom: 40px; }
 }
 
@@ -102,6 +109,7 @@
 @media (min-width: 501px) and (max-width: 999px) {
   .who-we-are-container { gap: 50px; }
 }
+.who-we-are-section {padding: 100px 10px;}
 
 /* desktop desde 1000px */
 @media (min-width: 1000px) {

@@ -1,10 +1,11 @@
 /* seccion principal */
 .ourservices-section {
+  position: relative; 
   width: 100%;
-  padding: 100px 20px;
-  background: #ac1f1d; 
+  padding: 100px 20px 280px 20px; 
+  background: radial-gradient(circle at center, #8a1313 0%, #4d0000 60%, #1a0000 100%);
   color: #fff;
-  overflow: hidden;
+  overflow: visible; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,6 +17,8 @@
   width: 100%;
   margin: 0 auto;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 /* titulo con doble subrayado blanco */
@@ -30,12 +33,9 @@
   transition: opacity 1.5s ease;
 }
 
-.ourservices-title.animate-in {
-  opacity: 1;
-}
+.ourservices-title.animate-in { opacity: 1; }
 
-.ourservices-title::before,
-.ourservices-title::after {
+.ourservices-title::before, .ourservices-title::after {
   content: "";
   position: absolute;
   left: 0;
@@ -43,9 +43,8 @@
   height: 2px;
   background-color: #fff;
 }
-
-.ourservices-title::before { bottom: -10px; }
-.ourservices-title::after { bottom: -15px; }
+.ourservices-title::before { bottom: -11px; }
+.ourservices-title::after { bottom: -15px; } 
 
 /* grid responsive */
 .ourservices-grid {
@@ -54,15 +53,14 @@
   gap: 32px;
 }
 
-/* card individual con efecto pro */
+/* card individual con efecto  */
 .ourservices-card {
-  background: rgba(255, 255, 255, 0.05); 
+  background: rgba(139, 26, 26, 0.4); 
   backdrop-filter: blur(5px);
   padding: 40px 25px;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   opacity: 0;
-  /* transicion de entrada suave en cascada */
   transition: 
     transform 1.8s cubic-bezier(0.2, 0.8, 0.2, 1), 
     opacity 1.5s ease-out,
@@ -73,61 +71,58 @@
   align-items: center;
 }
 
-/* direccion del scroll para el efecto parallax */
 .ourservices-card.down { transform: translateY(120px); }
 .ourservices-card.up { transform: translateY(-120px); }
 
-.ourservices-card.animate-in {
-  opacity: 1;
-  transform: translateY(0);
-}
+.ourservices-card.animate-in { opacity: 1; transform: translateY(0); }
 
-.ourservices-card.animate-out {
-  opacity: 0;
-  transition: none; 
-}
-
-/* hover premium */
 .ourservices-card:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(139, 26, 26, 0.7);
   transform: translateY(-10px) !important;
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* icono */
 .ourservices-icon {
   color: #fff; 
   margin-bottom: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.ourservices-icon svg {
-  width: 56px;
-  height: 56px;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
-}
+.ourservices-icon svg { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4)); }
 
 .ourservices-card:hover .ourservices-icon {
-  transform: scale(1.2) rotate(5deg);
+  transform: scale(1.15) rotate(5deg);
 }
 
-/* nombre y texto */
-.ourservices-name {
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.ourservices-name { font-weight: 700; margin-bottom: 15px; letter-spacing: 1px; }
+.ourservices-desc { opacity: 0.9; font-weight: 300; line-height: 1.5; }
+
+/* --- DIVISOR*/
+.v-divider-glow {
+  position: absolute;
+  bottom: -18px; 
+  width: 100%;
+  height: 200px; 
+  overflow: hidden;
+  line-height: 0;
+  z-index: 10;
 }
 
-.ourservices-desc {
-  opacity: 0.9;
-  font-weight: 300;
+.v-divider-glow svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 11px rgba(255, 78, 0, 1.6)); 
 }
 
-/* responsive */
-@media (max-width: 768px) {
-  .ourservices-section { padding: 60px 20px; }
-  .ourservices-card { padding: 30px 20px; }
-  .ourservices-title { margin-bottom: 50px; }
+
+/*  responsive */
+@media (max-width: 500px) {
+  .ourservices-section { padding: 60px 20px 200px 20px; }
+  .ourservices-title { font-size: 1.6rem; }
+  .v-divider-glow svg { height: 100px; filter: drop-shadow(0 0 0px rgba(255, 78, 0, 1.6)); }
+  .central-light-flare { width: 80px; height: 50px; top: 40%; }
+  .v-divider-glow {bottom: -100px;}
 }
+

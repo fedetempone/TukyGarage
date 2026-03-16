@@ -93,11 +93,11 @@ const AllVehicles = () => {
           ))}
         </div>
 
-        {/* boton epico acoplado */}
+        {/* boton acoplado */}
         <div className={`allvehicles-buttonwrapper ${isVisible ? "animate-in" : "animate-out"}`}>
           <Link to="/stock" className="allvehicles-cta-link">
             <button className="allvehicles-button">
-              <span className="button-text">Ver todos los vehículos</span>
+              <span className="button-text">Ver todos los Vehículos</span>
               <img src="/img/carButton.png" alt="car" className="button-car" />
             </button>
           </Link>

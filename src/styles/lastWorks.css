@@ -36,6 +36,7 @@
   border-radius: 1px;
 }
 
+
 /* primera liena abajo del h2 */
 .lastworks-title::before {
   bottom: -6px;
@@ -133,7 +134,7 @@
 }
 
 /* responsive */
-@media(max-width:768px){
+@media(max-width:500px){
   .lastworks-slide{
     height:250px;
   }

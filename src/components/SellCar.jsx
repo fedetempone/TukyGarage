@@ -22,12 +22,15 @@ const SellCar = () => {
 
   return (
     <section id="sellCarSectionId" className="sell-car-section" ref={sectionRef}>
+      <div className="light-trail-divider">
+        <div className="car-flare"></div>
+      </div>
       <div className="sell-car-banner">
         <div className="overlay"></div>
         <div className={`sell-car-text ${isVisible ? "animate-in" : "animate-out"}`}>
           <h2>¿Querés Vender tu Auto?</h2>
           <p>🚗 Cotiza tu vehículo y contacta con un asesor para coordinar la venta en minutos.</p>
-          
+
           {/* boton con el auto */}
           <a
             href="https://wa.me/5491123456789?text=Hola%20Me%20gustaria%20cotizar%20mi%20vehiculo"

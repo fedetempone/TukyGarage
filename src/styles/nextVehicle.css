@@ -13,7 +13,7 @@
   text-align: center;
 }
 
-/* titulo con subrayado ceñido */
+/* titulo con subrayado  */
 .next-vehicle-title {
   display: inline-block;
   position: relative;
@@ -23,6 +23,11 @@
   opacity: 0;
   transition: opacity 1.5s ease;
   max-width: 90%; 
+}
+
+.next-vehicle-title span {
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: bold;
 }
 
 /* lineas rojas */

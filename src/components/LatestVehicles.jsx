@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../styles/latestVehicles.css";
 
 const latestVehiclesData = [
@@ -10,18 +10,16 @@ const latestVehiclesData = [
 ];
 
 const LatestVehicles = () => {
-  /* clones para loop infinito */
   const extendedData = [
     latestVehiclesData[latestVehiclesData.length - 1],
     ...latestVehiclesData,
     latestVehiclesData[0]
   ];
 
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(3);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const lock = useRef(false);
   
-  /* refs para gestos mobile */
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
 
@@ -59,7 +57,6 @@ const LatestVehicles = () => {
     }
   }, [isTransitioning]);
 
-  /* funciones para swipe */
   const handleTouchStart = (e) => {
     touchStartX.current = e.targetTouches[0].clientX;
   };
@@ -77,12 +74,11 @@ const LatestVehicles = () => {
     touchEndX.current = null;
   };
 
-  /* calculo de ancho segun pantalla */
-  const cardWidth = window.innerWidth <= 500 ? 290 : 330;
+  const cardWidth = window.innerWidth <= 500 ? 290 : 330; 
 
   return (
     <section id="latestVehiclesSectionId" className="latest-vehicles-section">
-      <div className="container">
+      <div className="LatestVehiclesContainer">
         <h2 className="latest-vehicles-title">Ultimos Ingresos</h2>
 
         <div className="carousel-wrapper">
@@ -92,6 +88,7 @@ const LatestVehicles = () => {
 
           <div 
             className="latest-vehicles-carousel"
+            onHover={() => (lock.current = false)}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -101,12 +98,11 @@ const LatestVehicles = () => {
               onTransitionEnd={handleTransitionEnd}
               style={{
                 transform: `translateX(calc(-${activeIndex * cardWidth}px + 50% - ${cardWidth / 2}px))`,
-                transition: isTransitioning ? "transform 0.6s cubic-bezier(0.25,1,0.5,1)" : "none"
+                transition: isTransitioning ? "transform 0.7s cubic-bezier(0.25,1,0.5,1)" : "none"
               }}
             >
               {extendedData.map((vehicle, index) => {
-                const realIndex = index === 0 ? latestVehiclesData.length : index === extendedData.length - 1 ? 1 : index;
-                const isCenter = realIndex === activeIndex;
+                const isCenter = index === activeIndex;
 
                 return (
                   <div

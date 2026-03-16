@@ -4,6 +4,8 @@
   padding: 100px 20px;
   background: #000;
   overflow: hidden;
+  clip-path: polygon(0 80px, 100% 0, 100% 100%, 0 100%);
+  margin-top: -80px;
 }
 
 .allvehicles-container {
@@ -209,7 +211,6 @@
   background: #ac1f1d; 
   overflow: hidden;
   border: 2px solid #ac1f1d;
-  text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
 }

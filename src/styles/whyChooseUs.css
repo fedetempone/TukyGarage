@@ -30,6 +30,8 @@
 .whychooseus-title span {
   position: relative;
   display: inline-block;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: bold;
 }
 
 .whychooseus-title span::before,
@@ -85,8 +87,7 @@
 
 /* hover premium */
 .whychooseus-card:hover {
-  background: rgba(172, 31, 29, 0.05); /* fondo bordo muy suave */
-  transform: translateY(-10px) !important;
+  background: rgba(172, 31, 29, 0.05); 
   border-color: rgba(172, 31, 29, 0.2);
 }
 
@@ -121,7 +122,7 @@
 }
 
 /* responsive */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
   .whychooseus-section { 
     padding: 60px 20px; 
     text-align: center;

@@ -2,15 +2,17 @@
   --accent-color: #ac1f1d;
 }
 
-/* fondo oscuro */
 .how-we-work-section {
   width: 100%;
-  padding: 100px 20px;
-  background-color: rgba(0,0,0,0.95);
+  padding: 150px 20px 100px 20px; 
+  background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  position: relative;
+  z-index: 5;
+  margin-top: -80px; 
+  clip-path: polygon(0 80px, 100% 0, 100% 100%, 0 100%);
 }
 
 .how-we-work-container {
@@ -20,7 +22,6 @@
   color: #fff;
 }
 
-/* titulo animado */
 .section-title {
   display: inline-block;
   margin-bottom: 70px;
@@ -28,7 +29,7 @@
   letter-spacing: 2px;
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
   position: relative;
 }
 
@@ -47,14 +48,13 @@
   background-color: var(--accent-color);
 }
 .section-title::before { bottom: -12px; }
-.section-title::after { bottom: -18px; }
+.section-title::after { bottom: -16px; }
 
-/* grid con profundidad */
 .how-we-work-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
-  perspective: 1500px;
+  perspective: 2000px;
 }
 
 @media (min-width: 501px) and (max-width: 999px) {
@@ -64,61 +64,55 @@
   .how-we-work-grid { grid-template-columns: repeat(3,1fr); }
 }
 
-/* card principal */
 .how-we-work-card {
   background-color: #000;
   border-radius: 16px;
   border: 1px solid #1a1a1a;
   opacity: 0;
-  transition: opacity 0.6s ease-out;
-  transition-delay: var(--delay);
   position: relative;
   transform-style: preserve-3d;
   overflow: hidden;
-  will-change: transform;
-  transform: translateY(50px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  will-change: transform, opacity;
+  transition: transform 2.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.8s ease-out;
+  transition-delay: var(--delay);
 }
+
+.how-we-work-card.down { transform: translateY(200px) rotateX(-10deg); }
+.how-we-work-card.up { transform: translateY(-200px) rotateX(10deg); }
 
 .how-we-work-card.animate-in {
   opacity: 1;
-  transform: translateY(0) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform: translateY(0) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) !important;
 }
 
-/* sin delay en el movimiento del mouse */
 .how-we-work-card:hover {
   border-color: var(--accent-color);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  transition: transform 0s linear, border-color 0.3s ease;
+  box-shadow: 0 20px 45px rgba(172, 31, 29, 0.2);
+  transition: transform 0.1s linear, border-color 0.3s ease;
+  z-index: 10;
 }
 
-/* suavizado al quitar mouse */
 .how-we-work-card:not(:hover) {
-  transition: transform 0.5s ease-out;
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
 
-/* brillo dinámico */
 .card-glare {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none;
   z-index: 3;
   background: radial-gradient(
     circle at var(--mx, 50%) var(--my, 50%),
-    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.15) 0%,
     transparent 65%
   );
   opacity: var(--o, 0);
   transition: opacity 0.3s ease;
 }
 
-/* contenido con mas profundidad */
 .parallax-content {
-  padding: 40px 25px;
+  padding: 45px 30px;
   transform: translateZ(60px);
-  pointer-events: none;
 }
 
 .how-we-work-icon {
@@ -126,30 +120,30 @@
   color: var(--accent-color);
   display: flex;
   justify-content: center;
-  align-items: center;
   transform: translateZ(90px);
-  filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
 }
 
 .how-we-work-card h5 {
   margin-bottom: 15px;
   text-transform: uppercase;
   transform: translateZ(50px);
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .how-we-work-card p {
-  opacity: 0.85;
+  opacity: 0.8;
   font-weight: 300;
   transform: translateZ(30px);
+  line-height: 1.6;
 }
 
-/* Responsive */
 @media (max-width: 500px) {
-  .how-we-work-section { padding: 60px 20px; }
-  .how-we-work-grid { gap: 25px; }
-  .how-we-work-card { 
-    transform: translateY(50px) !important; 
-    transition: transform 0.4s ease-out, opacity 0.6s ease-out;
+  .how-we-work-section {
+    padding: 100px 20px 60px 20px;
+    clip-path: polygon(0 40px, 100% 0, 100% 100%, 0% 100%);
   }
-  .how-we-work-card.animate-in { transform: translateY(0) !important; }
+  .how-we-work-card { 
+    transition: transform 1.2s ease-out, opacity 1s ease-out;
+  }
 }

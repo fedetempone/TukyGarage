@@ -31,7 +31,7 @@
 
 /* columna contacto + redes */
 .footer-contact-col h4 {
-  margin-bottom: 8px;
+  margin-bottom: 15px;
   font-weight: 700;
 }
 
@@ -134,5 +134,10 @@
   .footer-socials {
     flex-direction: row;
     justify-content: center;
+  }
+
+  .footer-contact-col ul{
+    flex-direction: column;
+    align-items: center;
   }
 }
