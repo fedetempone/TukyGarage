@@ -79,7 +79,7 @@ const LatestVehicles = () => {
   return (
     <section id="latestVehiclesSectionId" className="latest-vehicles-section">
       <div className="LatestVehiclesContainer">
-        <h2 className="latest-vehicles-title">Ultimos Ingresos</h2>
+        <h2 className="latest-vehicles-title">Ultimos ingresos</h2>
 
         <div className="carousel-wrapper">
           <button className="nav-arrow left-arrow" onClick={prevSlide}>

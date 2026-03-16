@@ -199,12 +199,12 @@
   flex-direction: column;
   gap: 30px;
   padding: 0;
+  text-align: center;
 }
 
 .mobile-menu-wrapper ul li a {
   text-decoration: none;
   color: #fff;
-  font-size: 1.5rem;
   font-weight: bold;
 }
 

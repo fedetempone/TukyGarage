@@ -83,7 +83,7 @@ const HowWeWork = () => {
     <section className="how-we-work-section" ref={sectionRef}>
       <div className="how-we-work-container">
         <h2 className={`section-title ${visible ? "animate-in" : ""}`}>
-          Cómo Trabajamos
+          Cómo trabajamos
         </h2>
         <div className="how-we-work-grid">
           {workItems.map((item, index) => (

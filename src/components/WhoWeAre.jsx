@@ -37,7 +37,7 @@ const WhoWeAre = () => {
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 } // se activa apenas asoma un poquito
+      { threshold: 0.1 } 
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -62,7 +62,7 @@ const WhoWeAre = () => {
         <div 
           className={`who-we-are-text ${isVisible ? "animate-in" : "animate-out"} ${scrollDir}`}
         >
-          <h2>¿Quiénes Somos?</h2>
+          <h2>¿Quiénes somos?</h2>
           <p>
             Somos Emanuel y Matias, y en Tuky Garage transformamos la compra y venta
             de autos en una experiencia de confianza. No solo movemos stock:

@@ -68,7 +68,7 @@ const NextVehicle = () => {
     <section id="NextVehiculoSectionId" className="next-vehicle-section" ref={sectionRef}>
       <div className="next-vehicle-content">
         <h2 className={`next-vehicle-title ${isVisible ? "animate-in" : "animate-out"}`}>
-          <span>Tu Próximo Vehículo</span>
+          <span>Tu próximo vehículo</span>
         </h2>
 
         <div className="next-vehicle-grid">

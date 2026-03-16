@@ -125,13 +125,11 @@
 .sell-car-text h2 {
   margin-bottom: 20px;
   text-transform: uppercase;
-  font-size: 2.5rem;
 }
 
 .sell-car-text p {
   margin-bottom: 40px;
   max-width: 500px;
-  font-size: 1.1rem;
 }
 
 /* wrapper del link para el boton */
@@ -239,7 +237,6 @@
     transform: translateY(0);
   }
 
-  .sell-car-text h2 { font-size: 1.8rem; }
 }
 
 @supports (-webkit-touch-callout: none) {

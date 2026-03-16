@@ -59,7 +59,7 @@ const OurServices = () => {
     <section className="ourservices-section" ref={sectionRef}>
       <div className="ourservices-container">
         <h2 className={`ourservices-title ${isVisible ? "animate-in" : "animate-out"}`}>
-          Nuestros Servicios
+          Nuestros servicios
         </h2>
 
         <div className="ourservices-grid">
