@@ -23,7 +23,9 @@ const Hero = () => {
             Elegimos tu proximo auto y lo mantenemos como nuevo. Calidad y
             brillo en un solo lugar.
           </p>
-          <button className="hero-btn">PIDA UN TURNO CON NOSOTROS</button>
+          <a href="#FooterSectionId" className="hero-btn">
+            PIDA UN TURNO CON NOSOTROS
+          </a>
         </div>
       </div>
     </section>

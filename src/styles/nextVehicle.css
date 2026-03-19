@@ -116,7 +116,6 @@
 
 .next-vehicle-info h3 {
   margin-bottom: 12px;
-  text-transform: uppercase;
 }
 
 .next-vehicle-specs {
@@ -144,11 +143,16 @@
   transition: all 0.3s ease;
   text-transform: uppercase;
   cursor: pointer;
+  display: inline-block; 
+  text-decoration: none; 
+  text-align: center;
 }
 
 .next-vehicle-btn:hover {
   background-color: #ac1f1d;
   box-shadow: 0 0 20px rgba(172, 31, 29, 0.4);
+  filter: brightness(1.2);
+  transform: translateY(-2px);
 }
 
 /* responsive mobile */

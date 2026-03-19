@@ -1,36 +1,7 @@
 import { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom"; 
+import { allVehicles, createSlug } from "../data/vehiclesData";
 import "../styles/nextVehicle.css";
-
-const vehiclesData = [
-  {
-    id: 1,
-    image: "https://autotest.com.ar/wp-content/uploads/2021/02/TOYOTA-COROLLA-GR-S-7.jpg",
-    model: "Toyota Corolla",
-    year: 2020,
-    km: 54000
-  },
-  {
-    id: 2,
-    image: "https://acnews.blob.core.windows.net/imgnews/medium/NAZ_b896903ed5984615b7cc4712755f3cdc.jpg",
-    model: "Honda Civic",
-    year: 2019,
-    km: 67000
-  },
-  {
-    id: 3,
-    image: "https://acnews.blob.core.windows.net/imgnews/large/NAZ_e57174b319c14750a9b772448bba04a0.jpg",
-    model: "Ford Focus",
-    year: 2018,
-    km: 72000
-  },
-  {
-    id: 4,
-    image: "https://www.carsmagazine.com.ar/wp-content/uploads/2012/02/peugeot-308-argentina.jpg",
-    model: "Peugeot 308",
-    year: 2021,
-    km: 45000
-  }
-];
 
 const NextVehicle = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,8 +9,12 @@ const NextVehicle = () => {
   const sectionRef = useRef(null);
   const lastScrollY = useRef(0);
 
+  // co neste filtro buscamos todos los autos que incluyan "next" en el array categorias
+  const nextVehicles = allVehicles.filter(vehicle => 
+    vehicle.categories.includes("next")
+  );
+
   useEffect(() => {
-    // detector de direccion de scroll
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setScrollDir(currentScrollY > lastScrollY.current ? "down" : "up");
@@ -48,7 +23,6 @@ const NextVehicle = () => {
 
     window.addEventListener("scroll", handleScroll);
 
-    // intersection observer para las animaciones
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
@@ -72,32 +46,44 @@ const NextVehicle = () => {
         </h2>
 
         <div className="next-vehicle-grid">
-          {vehiclesData.map((vehicle, index) => (
-            <div
-              key={vehicle.id}
-              className={`next-vehicle-card ${isVisible ? "animate-in" : "animate-out"} ${scrollDir}`}
-              style={{ "--index": index }}
-            >
-              <div className="next-vehicle-img-container">
-                <img
-                  src={vehicle.image}
-                  alt={vehicle.model}
-                  className="next-vehicle-img"
-                />
-                <div className="next-vehicle-badge">{vehicle.year}</div>
-              </div>
+          {nextVehicles.map((vehicle, index) => {
+            const vehicleSlug = createSlug(vehicle.brand, vehicle.model); 
 
-              <div className="next-vehicle-info">
-                <h3>{vehicle.model}</h3>
-                <div className="next-vehicle-specs">
-                  <span>{vehicle.km.toLocaleString()} Kms</span>
-                  <div className="spec-divider"></div>
-                  <span>Transmisión Manual</span>
+            return (
+              <div
+                key={vehicle.id}
+                className={`next-vehicle-card ${isVisible ? "animate-in" : "animate-out"} ${scrollDir}`}
+                style={{ "--index": index }}
+              >
+                <div className="next-vehicle-img-container">
+                  <img
+                    src={vehicle.image}
+                    alt={`${vehicle.brand} ${vehicle.model}`}
+                    className="next-vehicle-img"
+                  />
+                  <div className="next-vehicle-badge">{vehicle.year}</div>
                 </div>
-                <button className="next-vehicle-btn">Ver Detalle</button>
+
+                <div className="next-vehicle-info">
+                  {/* marca y modelo */}
+                  <h3>{vehicle.brand} {vehicle.model}</h3>
+                  
+                  <div className="next-vehicle-specs">
+                    <span>{vehicle.km.toLocaleString()} Kms</span>
+                    <div className="spec-divider"></div>
+                    <span>{vehicle.transmission}</span>
+                  </div>
+                  
+                  <Link 
+                    to={`/vehiculos/${vehicleSlug}`} 
+                    className="next-vehicle-btn"
+                  >
+                    Ver Detalle
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

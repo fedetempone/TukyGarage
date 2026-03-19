@@ -59,7 +59,7 @@ const WhyChooseUs = () => {
     <section className="whychooseus-section" ref={sectionRef}>
       <div className="whychooseus-container">
         <h2 className={`whychooseus-title ${isVisible ? "animate-in" : "animate-out"}`}>
-          <span>Por Qué Elegirnos</span>
+          <span>Por qué elegirnos</span>
         </h2>
 
         <div className="whychooseus-grid">

@@ -13,6 +13,11 @@
   z-index: 5;
   margin-top: -80px; 
   clip-path: polygon(0 80px, 100% 0, 100% 100%, 0 100%);
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0); 
+  will-change: clip-path; 
 }
 
 .how-we-work-container {
@@ -20,6 +25,10 @@
   width: 100%;
   text-align: center;
   color: #fff;
+
+  isolation: isolate; 
+  position: relative;
+  z-index: 1;
 }
 
 .section-title {
@@ -74,6 +83,7 @@
   will-change: transform, opacity;
   transition: transform 2.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.8s ease-out;
   transition-delay: var(--delay);
+  contain: paint;
 }
 
 .how-we-work-card.down { transform: translateY(200px) rotateX(-10deg); }

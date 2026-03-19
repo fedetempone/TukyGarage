@@ -24,6 +24,7 @@ const Footer = () => {
             <h4>Contacto</h4>
             <ul>
               <li><a href="#contact">📞 +54 123 456 789</a></li>
+              <li><a href="#contact">📞 +54 101 121 314</a></li>
             </ul>
 
             <h4>Ubicación</h4>
@@ -60,7 +61,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* DERECHA: secciones/políticas */}
+          {/* DERECHA: secciones/politicas */}
           <div className="footer-col footer-links-col">
             <h4>Secciones & Políticas</h4>
             <ul>
@@ -74,7 +75,7 @@ const Footer = () => {
               <li><a href="#OurServicesSectionId">Servicios</a></li>
               <li><a href="#LastWorksSectionId">Últimos Trabajos</a></li>
               <li><a href="#WhyChooseUsSectionId">Por Qué Elegirnos</a></li>
-              <li><a href="#privacy">Políticas de Privacidad</a></li>
+              <li><a href="https://www.privacypolicies.com/live/cbc82533-70bf-4273-b96b-27640ee29f03">Políticas de Privacidad</a></li>
             </ul>
           </div>
 

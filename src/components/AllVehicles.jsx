@@ -1,27 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import "../styles/allVehicles.css";
 import { Calendar, Gauge, ChevronRight } from "lucide-react";
+import { allVehicles, createSlug } from "../data/vehiclesData";
+import "../styles/allVehicles.css";
 
-import car1 from "/img/car1.avif";
-import car2 from "/img/car2.avif";
-import car3 from "/img/car3.avif";
-import car4 from "/img/car4.avif";
-
-const vehicles = [
-  { id: 1, name: "Peugeot 308", year: 2019, km: "65.000 km", img: car1 },
-  { id: 2, name: "Toyota Corolla", year: 2021, km: "32.000 km", img: car2 },
-  { id: 3, name: "Ford Mustang", year: 2018, km: "41.000 km", img: car3 },
-  { id: 4, name: "Honda Civic", year: 2020, km: "27.000 km", img: car4 },
-  { id: 5, name: "BMW M3", year: 2017, km: "59.000 km", img: car1 },
-  { id: 6, name: "Audi A4", year: 2022, km: "18.000 km", img: car2 },
-];
-
-const AllVehicles = () => {
+const AllVehicles = ({ hideButton = false }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollDir, setScrollDir] = useState("down");
+  const [loadedImages, setLoadedImages] = useState({}); 
   const sectionRef = useRef(null);
   const lastScrollY = useRef(0);
+
+  // filtro vehiculos de stock general
+  const stockVehicles = allVehicles.filter(v => v.categories.includes("stock") || v.categories.includes("latest"));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,64 +35,83 @@ const AllVehicles = () => {
     };
   }, []);
 
-  const createSlug = (name) => name.toLowerCase().replace(/\s+/g, "-");
+  const handleImageLoad = (id) => {
+    setLoadedImages((prev) => ({ ...prev, [id]: true }));
+  };
 
   return (
-    <section className="allvehicles-section" ref={sectionRef}>
+    <section className={`allvehicles-section ${hideButton ? "is-stock-page" : ""}`} ref={sectionRef}>
       <div className="allvehicles-container">
         <h2 className={`allvehicles-title ${isVisible ? "animate-in" : "animate-out"}`}>
           Nuestro stock
         </h2>
 
         <div className="allvehicles-grid">
-          {vehicles.map((vehicle, index) => (
-            <Link 
-              to={`/vehiculos/${createSlug(vehicle.name)}`} 
-              key={vehicle.id} 
-              className={`allvehicles-card ${isVisible ? "animate-in" : "animate-out"} ${scrollDir}`}
-              style={{ "--index": index }}
-            >
-              <div className="allvehicles-img-wrapper">
-                <img
-                  src={vehicle.img}
-                  alt={vehicle.name}
-                  className="allvehicles-image"
-                />
-                <div className="allvehicles-overlay">
-                  <span className="allvehicles-view-more">Ver Detalle</span>
-                </div>
-              </div>
+          {stockVehicles.map((vehicle, index) => {
+            const vehicleSlug = createSlug(vehicle.brand, vehicle.model);
+            const isImgLoaded = loadedImages[vehicle.id];
 
-              <div className="allvehicles-cardinfo">
-                <div className="allvehicles-header-card">
-                  <h3 className="allvehicles-name">{vehicle.name}</h3>
-                  <ChevronRight className="allvehicles-arrow" size={20} />
-                </div>
-                
-                <div className="allvehicles-specs-row">
-                  <div className="allvehicles-spec">
-                    <Calendar className="allvehicles-icon" size={18}/>
-                    <span>{vehicle.year}</span>
+            return (
+              <Link
+                to={`/vehiculos/${vehicleSlug}`}
+                key={vehicle.id}
+                className={`allvehicles-card ${isVisible ? "animate-in" : "animate-out"} ${scrollDir}`}
+                style={{ "--index": index }}
+              >
+                <div className="allvehicles-img-wrapper">
+                  {/* skeleton loader  */}
+                  {!isImgLoaded && <div className="allvehicles-skeleton"></div>}
+                  
+                  <img
+                    src={vehicle.image}
+                    alt={`${vehicle.brand} ${vehicle.model}`}
+                    className={`allvehicles-image ${isImgLoaded ? "img-loaded" : "img-loading"}`}
+                    onLoad={() => handleImageLoad(vehicle.id)}
+                    loading="lazy"
+                  />
+                  <div className="allvehicles-overlay">
+                    <span className="allvehicles-view-more">Ver Detalle</span>
                   </div>
-                  <div className="allvehicles-spec">
-                    <Gauge className="allvehicles-icon" size={18}/>
-                    <span>{vehicle.km}</span>
+                </div>
+
+                <div className="allvehicles-cardinfo">
+                  <div className="allvehicles-header-card">
+                    <h3 className="allvehicles-name">
+                      {vehicle.brand} {vehicle.model}
+                    </h3>
+                    <ChevronRight className="allvehicles-arrow" size={20} />
+                  </div>
+
+                  <p className="allvehicles-price">
+                    $ {vehicle.price.toLocaleString("es-AR")}
+                  </p>
+
+                  <div className="allvehicles-specs-row">
+                    <div className="allvehicles-spec">
+                      <Calendar className="allvehicles-icon" size={18} />
+                      <span>{vehicle.year}</span>
+                    </div>
+                    <div className="allvehicles-spec">
+                      <Gauge className="allvehicles-icon" size={18} />
+                      <span>{vehicle.km.toLocaleString("es-AR")} km</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
+            );
+          })}
+        </div>
+
+        {!hideButton && (
+          <div className={`allvehicles-buttonwrapper ${isVisible ? "animate-in" : "animate-out"}`}>
+            <Link to="/vehiculos" className="allvehicles-cta-link">
+              <button className="allvehicles-button">
+                <span className="button-text">Ver todos los Vehículos</span>
+                <img src="/img/carButton.png" alt="car" className="button-car" />
+              </button>
             </Link>
-          ))}
-        </div>
-
-        {/* boton acoplado */}
-        <div className={`allvehicles-buttonwrapper ${isVisible ? "animate-in" : "animate-out"}`}>
-          <Link to="/stock" className="allvehicles-cta-link">
-            <button className="allvehicles-button">
-              <span className="button-text">Ver todos los Vehículos</span>
-              <img src="/img/carButton.png" alt="car" className="button-car" />
-            </button>
-          </Link>
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );

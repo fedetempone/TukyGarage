@@ -1,81 +1,79 @@
 .latest-vehicles-section {
   width: 100%;
   background-color: #fff;
-  padding: 120px 0; 
+  padding: 100px 0;
   overflow: hidden;
 }
 
 .LatestVehiclesContainer {
-  max-width: 100%; 
-  margin: 0 auto;
-  position: relative;
+  width: 100%;
   text-align: center;
 }
 
 .latest-vehicles-title {
   display: inline-block;
   position: relative;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
   color: #000;
-  letter-spacing: 2px;
-  font-weight: 800;
 }
 
-.latest-vehicles-title::before,
 .latest-vehicles-title::after {
   content: "";
   position: absolute;
   width: 100%;
-  height: 2px;
-  background-color: #ac1f1d;
+  height: 4px;
+  bottom: -15px;
   left: 0;
+  border-bottom: 2px solid #ac1f1d;
+  border-top: 2px solid #ac1f1d;
 }
-.latest-vehicles-title::before { bottom: -10px; }
-.latest-vehicles-title::after { bottom: -15px; }
 
-.carousel-wrapper {
+.carousel-wrapper-stepper {
   position: relative;
+  width: 100%;
+  height: 550px; 
   display: flex;
   align-items: center;
-  width: 100%;
-  padding: 60px 0;
+  justify-content: center;
+  margin-top: 40px;
 }
 
-.latest-vehicles-carousel {
+.stepper-viewport {
+  position: relative;
   width: 100%;
-  overflow: visible;
-}
-
-.carousel-track {
+  height: 100%;
   display: flex;
   align-items: center;
-  will-change: transform;
+  justify-content: center;
+  perspective: 1000px; 
 }
 
-.latest-vehicle-card {
-  flex: 0 0 300px; 
-  margin: 0 15px; 
+.stepper-card {
+  position: absolute;
+  width: 320px;
   background-color: #fff;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
   border: 1px solid #f0f0f0;
-  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.7s ease, box-shadow 0.7s ease;
-  opacity: 0.3;
-  transform: scale(0.85);
+  text-decoration: none;
+  color: inherit;
+  
+  /* transicion escalera */
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
+  will-change: transform, opacity, filter;
 }
 
-.latest-vehicle-card.card-active {
-  opacity: 1;
-  transform: scale(1.15);
-  z-index: 10;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+.stepper-card.active {
+  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
   border-color: transparent;
 }
 
 .img-container {
   width: 100%;
-  height: 210px;
+  height: 220px;
+  position: relative;
+  background: #f9f9f9;
 }
 
 .latest-vehicle-img {
@@ -84,79 +82,82 @@
   object-fit: cover;
 }
 
+.card-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(172, 31, 29, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stepper-card.active:hover .card-overlay {
+  opacity: 1;
+}
+
+.card-overlay span {
+  color: #fff;
+  font-weight: 700;
+  border: 2px solid #fff;
+  padding: 8px 20px;
+  text-transform: uppercase;
+}
+
 .latest-vehicle-info {
-  padding: 25px;
-  background: #fff;
+  padding: 25px 20px;
+  text-align: left;
 }
 
 .vehicle-name {
-  color: #666;
-  margin-bottom: 8px;
-  text-transform: uppercase;
+  color: #888;
   font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
 .vehicle-price {
-  color: #1a1a1a;
+  color: #000;
   font-weight: 800;
+  font-size: 1.6rem;
 }
 
+/* flechas */
 .nav-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 55px;
-  height: 55px;
-  background-color: #fff;
+  width: 60px;
+  height: 60px;
+  background: #fff;
   border-radius: 50%;
+  border: 1px solid #eee;
+  cursor: pointer;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  z-index: 100;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  border: 1px solid #eee;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .left-arrow { left: 5%; }
 .right-arrow { right: 5%; }
-
-.arrow-icon {
-  color: #ac1f1d;
-  line-height: 0;
-}
+.arrow-icon { color: #ac1f1d; font-size: 2.5rem; line-height: 0; }
 
 .nav-arrow:hover {
-  background-color: #ac1f1d;
+  background: #ac1f1d;
   transform: translateY(-50%) scale(1.1);
 }
+.nav-arrow:hover .arrow-icon { color: #fff; }
 
-.nav-arrow:hover .arrow-icon {
-  color: #fff;
-}
-
-@media (max-width: 768px) {
-  .left-arrow { left: 20px; }
-  .right-arrow { right: 20px; }
-}
-
+/* responsive */
 @media (max-width: 500px) {
-  .latest-vehicles-section { padding: 60px 0; }
-  
-  .latest-vehicle-card {
-    flex: 0 0 270px;
-    margin: 0 10px;
-    opacity: 0.4;
-    transform: scale(0.85);
-  }
-  
-  .latest-vehicle-card.card-active {
-    transform: scale(1); 
-  }
-
-  .nav-arrow {
-    width: 45px;
-    height: 45px;
-  }
+  .stepper-card { width: 260px; }
+  .carousel-wrapper-stepper { height: 450px; }
+  .nav-arrow { bottom: -20px; top: auto; transform: none; width: 50px; height: 50px; }
+  .left-arrow { left: 25%; }
+  .right-arrow { right: 25%; }
 }

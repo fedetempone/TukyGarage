@@ -1,125 +1,81 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { allVehicles, createSlug } from "../data/vehiclesData";
 import "../styles/latestVehicles.css";
 
-const latestVehiclesData = [
-  { id: 1, image: "https://autotest.com.ar/wp-content/uploads/2021/02/TOYOTA-COROLLA-GR-S-7.jpg", brand: "Toyota Corolla", model: "2.0 SEG CVT", price: 25460000 },
-  { id: 2, image: "https://acnews.blob.core.windows.net/imgnews/medium/NAZ_b896903ed5984615b7cc4712755f3cdc.jpg", brand: "Honda Civic", model: "1.5 TURBO EXT", price: 22950000 },
-  { id: 3, image: "https://acnews.blob.core.windows.net/imgnews/large/NAZ_e57174b319c14750a9b772448bba04a0.jpg", brand: "Ford Focus", model: "2.0 TITANIUM", price: 18010000 },
-  { id: 4, image: "https://www.carsmagazine.com.ar/wp-content/uploads/2012/02/peugeot-308-argentina.jpg", brand: "Peugeot 308", model: "1.6 FELINE", price: 15910000 },
-  { id: 5, image: "https://www.opencars.com.ar/wp-content/uploads/2020/11/7.jpg", brand: "VW Nivus", model: "1.0 TSI COMFORT", price: 21500000 },
-];
-
 const LatestVehicles = () => {
-  const extendedData = [
-    latestVehiclesData[latestVehiclesData.length - 1],
-    ...latestVehiclesData,
-    latestVehiclesData[0]
-  ];
+  const latestData = useMemo(() => 
+    allVehicles.filter(v => v.categories.includes("latest")).slice(0, 5), 
+  []);
 
-  const [activeIndex, setActiveIndex] = useState(3);
-  const [isTransitioning, setIsTransitioning] = useState(true);
-  const lock = useRef(false);
-  
-  const touchStartX = useRef(null);
-  const touchEndX = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(2);
 
   const nextSlide = () => {
-    if (lock.current) return;
-    lock.current = true;
-    setActiveIndex((prev) => prev + 1);
+    setActiveIndex((prev) => (prev + 1) % latestData.length);
   };
 
   const prevSlide = () => {
-    if (lock.current) return;
-    lock.current = true;
-    setActiveIndex((prev) => prev - 1);
+    setActiveIndex((prev) => (prev - 1 + latestData.length) % latestData.length);
   };
 
-  const handleTransitionEnd = () => {
-    if (activeIndex === extendedData.length - 1) {
-      setIsTransitioning(false);
-      setActiveIndex(1);
-    }
-    if (activeIndex === 0) {
-      setIsTransitioning(false);
-      setActiveIndex(latestVehiclesData.length);
-    }
-    lock.current = false;
+  const getCardStyles = (index) => {
+    const total = latestData.length;
+    let diff = index - activeIndex;
+    
+    // carrusel circular
+    if (diff > 2) diff -= total;
+    if (diff < -2) diff += total;
+
+    const absDiff = Math.abs(diff);
+
+    // escalera de cards
+    const scale = absDiff === 0 ? 1.15 : absDiff === 1 ? 0.85 : 0.65;
+    const translateX = diff * (window.innerWidth <= 500 ? 140 : 220);
+    const zIndex = 10 - absDiff;
+    const opacity = absDiff === 0 ? 1 : absDiff === 1 ? 0.7 : 0.3;
+    const blur = absDiff === 0 ? 0 : absDiff === 1 ? 1 : 3;
+
+    return {
+      transform: `translateX(${translateX}px) scale(${scale})`,
+      zIndex,
+      opacity,
+      filter: `blur(${blur}px)`,
+    };
   };
-
-  useEffect(() => {
-    if (!isTransitioning) {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsTransitioning(true);
-        });
-      });
-    }
-  }, [isTransitioning]);
-
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
-    const distance = touchStartX.current - touchEndX.current;
-    if (distance > 50) nextSlide();
-    if (distance < -50) prevSlide();
-    touchStartX.current = null;
-    touchEndX.current = null;
-  };
-
-  const cardWidth = window.innerWidth <= 500 ? 290 : 330; 
 
   return (
-    <section id="latestVehiclesSectionId" className="latest-vehicles-section">
+    <section className="latest-vehicles-section">
       <div className="LatestVehiclesContainer">
-        <h2 className="latest-vehicles-title">Ultimos ingresos</h2>
+        <h2 className="latest-vehicles-title">Últimos ingresos</h2>
 
-        <div className="carousel-wrapper">
+        <div className="carousel-wrapper-stepper">
           <button className="nav-arrow left-arrow" onClick={prevSlide}>
             <span className="arrow-icon">‹</span>
           </button>
 
-          <div 
-            className="latest-vehicles-carousel"
-            onHover={() => (lock.current = false)}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            <div
-              className="carousel-track"
-              onTransitionEnd={handleTransitionEnd}
-              style={{
-                transform: `translateX(calc(-${activeIndex * cardWidth}px + 50% - ${cardWidth / 2}px))`,
-                transition: isTransitioning ? "transform 0.7s cubic-bezier(0.25,1,0.5,1)" : "none"
-              }}
-            >
-              {extendedData.map((vehicle, index) => {
-                const isCenter = index === activeIndex;
+          <div className="stepper-viewport">
+            {latestData.map((vehicle, index) => {
+              const vehicleSlug = createSlug(vehicle.brand, vehicle.model);
+              const isCenter = index === activeIndex;
 
-                return (
-                  <div
-                    key={`${vehicle.id}-${index}`}
-                    className={`latest-vehicle-card ${isCenter ? "card-active" : ""}`}
-                  >
-                    <div className="img-container">
-                      <img src={vehicle.image} alt={vehicle.brand} className="latest-vehicle-img" />
-                    </div>
-                    <div className="latest-vehicle-info">
-                      <p className="vehicle-name">{vehicle.brand} {vehicle.model}</p>
-                      <p className="vehicle-price">$ {vehicle.price.toLocaleString("es-AR")}</p>
-                    </div>
+              return (
+                <Link
+                  to={`/vehiculos/${vehicleSlug}`}
+                  key={vehicle.id}
+                  className={`stepper-card ${isCenter ? "active" : ""}`}
+                  style={getCardStyles(index)}
+                >
+                  <div className="img-container">
+                    <img src={vehicle.image} alt={vehicle.brand} className="latest-vehicle-img" />
+                    <div className="card-overlay"><span>Ver Detalle</span></div>
                   </div>
-                );
-              })}
-            </div>
+                  <div className="latest-vehicle-info">
+                    <p className="vehicle-name">{vehicle.brand} {vehicle.model}</p>
+                    <p className="vehicle-price">$ {vehicle.price.toLocaleString("es-AR")}</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
 
           <button className="nav-arrow right-arrow" onClick={nextSlide}>

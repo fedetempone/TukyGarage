@@ -1,8 +1,25 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; 
 import "../styles/scrollToTop.css";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { pathname } = useLocation(); 
+
+  // scrolleo al top cuando cambia el link
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant" 
+      });
+      document.documentElement.scrollTo(0, 0);
+      document.body.scrollTo(0, 0);
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [pathname]); 
 
   useEffect(() => {
     const toggleVisibility = () => {
