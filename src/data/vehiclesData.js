@@ -65,14 +65,14 @@ export const allVehicles = [
       exterior: ["Llantas 17\"", "Faros Full LED", "Cámara de retroceso"]
     }
   },
-  {
+ {
     id: 3,
     brand: "BMW",
     model: "M5 CS",
     year: 2021,
     km: 12000,
     price: 185000000,
-    image: "https://s.list.am/f/393/83956393.webp",
+    image: "https://i.redd.it/cqjlhyk6ves91.jpg",
     gallery: [
       "https://www.shutterstock.com/image-photo/indianapolis-june-30-2024-used-600nw-2484234367.jpg",
       "https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2021%2F08%2Fmanhart-mh5-gtr-bmw-m5-cs-v8-limited-edition-tuned-custom-german-supercar-saloon-14.jpg?q=75&w=800&cbr=1&fit=max",
@@ -82,7 +82,7 @@ export const allVehicles = [
     transmission: "Automática",
     fuel: "Nafta",
     description: "Máximo rendimiento. Motor V8 Twin-Turbo, edición limitada CS con detalles en fibra de carbono.",
-    categories: ["stock"],
+    categories: ["stock", "next"],
     specs: {
       motor: "4.4 V8 Twin-Power Turbo",
       potencia: "635 hp",
@@ -181,7 +181,7 @@ export const allVehicles = [
     transmission: "Automática",
     fuel: "Nafta",
     description: "Motor turbo eficiente. Pantalla VW Play de 10 pulgadas. Diseño moderno y deportivo.",
-    categories: ["latest"],
+    categories: ["next", "latest"],
     specs: {
       motor: "1.0 TSI",
       potencia: "116 hp",

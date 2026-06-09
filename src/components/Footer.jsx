@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="footer-section">
+    <footer id="FooterSectionId" className="footer-section">
       <div className="footer-overlay">
 
         <div className="footer-container">
@@ -41,7 +41,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="https://instagram.com" target="_blank" rel="noreferrer">
+                <a href="https://www.instagram.com/tukygarage.arg/" target="_blank" rel="noreferrer">
                   <InstagramLogo size={22} weight="bold" />
                   Instagram
                 </a>

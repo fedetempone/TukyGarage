@@ -58,10 +58,6 @@ const Home = () => {
         <WhyChooseUs />
       </section>
 
-      <section id="FooterSectionId">
-        <Footer />
-      </section>
-
     </>
   );
 };
